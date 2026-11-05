@@ -201,6 +201,15 @@ body.gated main,body.gated .adminbar,body.gated .toast{display:none}
 .review-row .review-actions button, .review-row .review-actions label { font: inherit; font-size: .88rem; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
 .review-row .review-error { color: var(--red); font-size: .88rem; margin: 6px 0 0; }
 
+/* Shelf card text: title and author are separate rows, not one run-on line.
+   (2026-11-05 — the spans had no CSS, so they ran together inline.) */
+.book-meta { display: block; padding: 14px 4px 2px; }
+.book-title, .book-alt, .book-author, .book-marks { display: block; }
+.book-title { font: 700 clamp(1.08rem, 2vw, 1.3rem)/1.13 "Fredoka", "Noto Sans TC", sans-serif; color: var(--red); }
+.book-alt { color: var(--muted); font-size: .84rem; margin-top: 2px; }
+.book-author { color: var(--muted); font-size: .84rem; margin-top: 5px; }
+.book-marks { margin-top: 8px; }
+
 /* Detail dialog: never let a field force the dialog wider than the screen.
    (Fix, 2026-11-05: the edit screen blew out sideways because the title
    input sat inside the giant <h2> font with no width rule. The markup now
@@ -210,6 +219,12 @@ body.gated main,body.gated .adminbar,body.gated .toast{display:none}
 .detail-body input, .detail-body textarea { max-width: 100%; box-sizing: border-box; }
 .edit-status { color: var(--muted, #5b7285); font-size: .9rem; min-height: 1.2em; }
 .edit-error { color: var(--red); font-size: .9rem; min-height: 1.2em; }
+
+/* Users dialog tabs: the list and the add-account form are separate panels.
+   (Split 2026-11-05 — one long page was hard to use.) */
+.users-dialog .users-tabs { margin-bottom: 14px; }
+.users-tab-panel[hidden] { display: none; }
+.users-dialog .dlg-body h3 { margin: 2px 0 8px; }
 
 /* Shelf card tags */
 .book-marks { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
@@ -384,21 +399,29 @@ body.gated main,body.gated .adminbar,body.gated .toast{display:none}
   <dialog class="admin-dialog users-dialog" id="usersDialog" aria-labelledby="usersTitle">
     <div class="dlg-head"><h2 id="usersTitle">Users</h2><button class="dialog-close" id="usersClose" type="button" aria-label="Close users">×</button></div>
     <div class="dlg-body">
-      <p>One account per child. New accounts start as general users; promote trusted parents to moderator here.</p>
-      <div id="usersList"></div>
-      <h3>Add an account</h3>
-      <div class="user-form">
-        <label>Parent's email<input id="nuEmail" type="email" autocomplete="off"></label>
-        <label>Child's nickname<input id="nuNickname" type="text" autocomplete="off"></label>
-        <label>Child's age<input id="nuAge" type="number" min="0" max="18" autocomplete="off"></label>
-        <label>Starting password<input id="nuPassword" type="text" autocomplete="off"></label>
+      <div class="mode-toggle users-tabs" role="tablist" aria-label="User management">
+        <button type="button" role="tab" data-users-tab="list" class="active" aria-selected="true">User list</button>
+        <button type="button" role="tab" data-users-tab="add" aria-selected="false">Add account</button>
       </div>
-      <p class="hint">Share the starting password privately with the parent and ask them to change it after first login.</p>
-      <p class="busy" id="usersBusy" role="status"></p>
-      <p class="error" id="usersError" role="alert"></p>
+      <div class="users-tab-panel" id="usersListPanel" role="tabpanel" aria-label="User list">
+        <p>One account per child. New accounts start as general users; promote trusted parents to moderator here.</p>
+        <div id="usersList"></div>
+      </div>
+      <div class="users-tab-panel" id="usersAddPanel" role="tabpanel" aria-label="Add an account" hidden>
+        <h3>Add an account</h3>
+        <div class="user-form">
+          <label>Parent's email<input id="nuEmail" type="email" autocomplete="off"></label>
+          <label>Child's nickname<input id="nuNickname" type="text" autocomplete="off"></label>
+          <label>Child's age<input id="nuAge" type="number" min="0" max="18" autocomplete="off"></label>
+          <label>Starting password<input id="nuPassword" type="text" autocomplete="off"></label>
+        </div>
+        <p class="hint">Share the starting password privately with the parent and ask them to change it after first login.</p>
+        <p class="busy" id="usersBusy" role="status"></p>
+        <p class="error" id="usersError" role="alert"></p>
+      </div>
       <div class="dlg-actions">
         <button class="action" id="usersDone" type="button">Done</button>
-        <button class="action primary" id="addUserBtn" type="button">Add account</button>
+        <button class="action primary" id="addUserBtn" type="button" hidden>Add account</button>
       </div>
     </div>
   </dialog>
@@ -476,12 +499,12 @@ const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
-function showToast(msg) {
+function showToast(msg, ms) {
   const t = $('toast');
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(showToast._t);
-  showToast._t = setTimeout(() => t.classList.remove('show'), 4200);
+  showToast._t = setTimeout(() => t.classList.remove('show'), ms || 4200);
 }
 function downloadBlob(blob, name) {
   const a = document.createElement('a');
@@ -555,7 +578,14 @@ const canEditBook = (b) => !!(me && (isMod() || b.added_by === myId()));
 const canDeleteBook = () => isMod();
 const coverUrl = (b) => {
   if (!b || !b.cover_key || b.cover_status !== 'ok') return null;
-  return sb.storage.from(COVERS_BUCKET).getPublicUrl(b.cover_key).data.publicUrl;
+  const base = sb.storage.from(COVERS_BUCKET).getPublicUrl(b.cover_key).data.publicUrl;
+  // Cache-busting: a replaced cover has the SAME url as the old one, so
+  // without a version the browser keeps showing the old image after Save
+  // (live bug, 2026-11-05 — the family app fixed this the same way). The
+  // books trigger bumps updated_at on every update, so it changes whenever
+  // a cover is saved.
+  const v = b.updatedAt ? new Date(b.updatedAt).getTime() : '';
+  return v ? base + '?v=' + v : base;
 };
 
 function mapBook(row) {
@@ -572,6 +602,7 @@ function mapBook(row) {
     language: langs.includes('zh') && !langs.includes('en') ? '中文' : 'English',
     langs, addedOn: row.created_at, addedBy: row.added_by,
     cover_key: row.cover_key, cover_status: row.cover_status || 'needs_review',
+    updatedAt: row.updated_at,
     storyEn: row.story_en || '', storyZh: row.story_zh || '',
     dupOthers: [],
   };
@@ -805,8 +836,12 @@ function coverHtml(b, overrideUrl) {
     return '<div class="cover-frame">' + dup
       + '<img src="' + escapeHtml(url) + '" alt="Cover of ' + escapeHtml(b.title) + '" loading="lazy"></div>';
   }
-  return '<div class="cover-frame"><div class="cover-placeholder-mark" aria-label="No cover yet">' + dup
-    + '<span>No cover<br>yet</span></div></div>';
+  // No cover yet: the family app's name placeholder (title in big red
+  // letters), not a blank frame. Uses the same classes the base CSS styles.
+  return '<div class="cover-frame">' + dup + '<div class="cover-unavailable">'
+    + '<span class="cover-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 18c-6-6-14-6-19-3v22c6-3 13-2 19 3zm0 0c6-6 14-6 19-3v22c-6-3-13-2-19 3z"/><path d="M24 18v22"/></svg></span>'
+    + '<span class="cover-title">' + escapeHtml(b.title) + '</span>'
+    + '<span class="cover-note">Cover image unavailable</span></div></div>';
 }
 function render() {
   const list = sortedBooks(books.filter(bookMatches));
@@ -904,7 +939,7 @@ function detailVisualHtml(b, editing) {
   let html = coverHtml(b, stagedCover && stagedCover.preview ? stagedCover.preview : null);
   if (editing) {
     html += '<section class="cover-editor" aria-label="Change the cover"><h3>Change the cover</h3>'
-      + '<p>Choose a file or paste a link. The new cover is staged here and saved when you save the book.</p>'
+      + '<p>Choose a file or paste a direct image link. Some websites block links — if one fails, download the image and upload the file instead.</p>'
       + '<div class="upload-grid"><label for="coverFile">Upload image</label>'
       + '<input class="file-input" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp">'
       + '<input class="url-input" id="coverUrl" type="url" placeholder="Paste a direct image URL" aria-label="Direct image URL">'
@@ -1105,16 +1140,26 @@ async function saveDetailEdits(book) {
         else if (stagedCover.kind === 'remove') await removeCover(saved);
       } catch (e) { coverError = e.message || 'Could not save the cover.'; }
     }
+    const stagedKind = stagedCover ? stagedCover.kind : null;
     clearStagedCover();
     await loadAll();
     const fresh = books.find((x) => x.id === saved.id);
+    // Verify the cover actually landed: never report "Book saved" while a
+    // cover silently did not save (live complaint, 2026-11-05).
+    if (stagedKind === 'file' || stagedKind === 'link') {
+      if (!fresh || fresh.cover_status !== 'ok') coverError = 'The cover did not save. Please try saving it again.';
+    } else if (stagedKind === 'remove') {
+      if (!fresh || fresh.cover_status !== 'placeholder') coverError = 'The cover was not removed. Please try saving again.';
+    }
     const wasAdding = addingBook;
     addingBook = false;
     if (fresh) openBook(fresh, 'view');
+    // A failed cover stays on screen longer: the normal 4-second toast is
+    // too quick to read for a two-line error (live complaint, 2026-11-05).
     showToast((wasAdding ? 'Book added to the library.' : 'Book saved.')
       + (generatedSerial ? ' HKPL Serial Number ' + generatedSerial + ' was assigned.' : '')
       + (check.warnings.length ? ' Note: ' + check.warnings.join(' ') : '')
-      + (coverError ? ' Cover could not be saved: ' + coverError : ''));
+      + (coverError ? ' Cover could not be saved: ' + coverError : ''), coverError ? 10000 : undefined);
     return true;
   } catch (err) {
     if (statusEl) statusEl.textContent = '';
@@ -1132,10 +1177,12 @@ function leaveEdit(action) {
   if (action === 'close' || addingBook) { dialog.close(); return; }
   if (currentBook) openBook(currentBook, 'view');
 }
-function refreshVisualColumn(b) {
+function refreshVisualColumn(b, status) {
   const vis = dialog.querySelector('.detail-visual');
   if (vis) vis.outerHTML = detailVisualHtml(b, detailMode === 'edit');
   wireDetailVisual(b);
+  // The re-render replaces the status line, so set its text after, not before.
+  if (status && $('uploadStatus')) $('uploadStatus').textContent = status;
 }
 function wireDetailVisual(b) {
   const fileInput = $('coverFile');
@@ -1147,17 +1194,29 @@ function wireDetailVisual(b) {
     clearStagedCover();
     stagedObjectUrl = URL.createObjectURL(f);
     stagedCover = { kind: 'file', file: f, preview: stagedObjectUrl };
-    $('uploadStatus').textContent = 'Cover staged — it is saved when you save the book.';
-    refreshVisualColumn(b);
+    refreshVisualColumn(b, 'Cover staged — it is saved when you save the book.');
   });
   const linkBtn = $('stageCoverLink');
-  if (linkBtn) linkBtn.addEventListener('click', () => {
+  if (linkBtn) linkBtn.addEventListener('click', async () => {
     const url = ($('coverUrl').value || '').trim();
     if (!url) { $('uploadStatus').textContent = 'Paste an image link first.'; return; }
+    // Check the link NOW, not at Save: the preview image displays fine
+    // even when the browser is blocked from reading the bytes, so a bad
+    // link used to look staged and only fail on Save ("Load failed").
+    // A good link is fetched once here and staged as bytes, so Save just
+    // uploads and cannot fail on it.
+    linkBtn.disabled = true;
+    $('uploadStatus').textContent = 'Checking the link…';
+    const blob = await tryFetchImage(url);
+    linkBtn.disabled = false;
+    if (!blob) {
+      $('uploadStatus').textContent = 'That link did not return a usable image. Download the image and upload the file instead.';
+      return;
+    }
     clearStagedCover();
-    stagedCover = { kind: 'link', url, preview: url };
-    $('uploadStatus').textContent = 'Cover link staged — it is fetched when you save the book.';
-    refreshVisualColumn(b);
+    stagedObjectUrl = URL.createObjectURL(blob);
+    stagedCover = { kind: 'file', file: new File([blob], 'cover.jpg', { type: blob.type || 'image/jpeg' }), preview: stagedObjectUrl };
+    refreshVisualColumn(b, 'Cover staged — it is saved when you save the book.');
   });
   const removeBtn = $('removeCover');
   if (removeBtn) removeBtn.addEventListener('click', () => {
@@ -1267,7 +1326,11 @@ async function setBookCover(bookId, key, status) {
 }
 async function uploadCoverFile(bookId, file, bookRow) {
   const path = coverObjectKey(bookId);
-  const upsert = isMod() || (bookRow && bookRow.added_by === myId() && !bookRow.cover_key);
+  // bookRow may be a database row (added_by, cover_key) or a mapped book
+  // (addedBy, cover_key); accept both spellings.
+  const ownerId = bookRow ? (bookRow.added_by || bookRow.addedBy) : null;
+  const hasCover = !!(bookRow && (bookRow.cover_key || bookRow.coverKey));
+  const upsert = isMod() || (ownerId === myId() && !hasCover);
   const { error } = await sb.storage.from(COVERS_BUCKET).upload(path, file, { upsert, contentType: file.type });
   if (error) throw new Error(error.message);
   await setBookCover(bookId, path, 'ok');
@@ -1278,9 +1341,15 @@ async function blobIsRealImage(blob) {
   return true;
 }
 async function tryFetchImage(url) {
-  const res = await fetch(url, { mode: 'cors' });
+  // A fetch can reject outright (the host blocks browser reading — the
+  // "Load failed" error J saw on a cover link). That is a "no image", not a
+  // crash: return null so the caller shows the friendly download-and-upload
+  // message instead of the browser's raw error.
+  let res;
+  try { res = await fetch(url, { mode: 'cors' }); } catch (e) { return null; }
   if (!res.ok) return null;
-  const blob = await res.blob();
+  let blob;
+  try { blob = await res.blob(); } catch (e) { return null; }
   return blobIsRealImage(blob) ? blob : null;
 }
 async function fetchCoverForBook(book) {
@@ -1303,13 +1372,13 @@ async function fetchCoverForBook(book) {
     } catch (e) { blob = null; }
   }
   if (!blob) return false;
-  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book.raw);
+  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book);
   return true;
 }
 async function fetchCoverFromLink(book, url) {
   const blob = await tryFetchImage(url);
   if (!blob) throw new Error('That link did not return a usable image. Download the image and upload the file instead.');
-  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book.raw);
+  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book);
 }
 async function removeCover(book) {
   const { error } = await sb.storage.from(COVERS_BUCKET).remove([coverObjectKey(book.id)]);
@@ -1479,6 +1548,22 @@ async function clearLibrary() {
 }
 
 // ---------- users (admin) ----------
+// The Users dialog has two tabs: the list (roles, enable/disable, edit) and
+// the add-account form. They were one long page; splitting them keeps the
+// list readable and the form focused. After creating an account the dialog
+// lands back on the list so the new account is visible.
+let usersTab = 'list'; // 'list' | 'add'
+function setUsersTab(name) {
+  usersTab = name;
+  $$('[data-users-tab]').forEach((b) => {
+    const on = b.dataset.usersTab === name;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', String(on));
+  });
+  $('usersListPanel').hidden = name !== 'list';
+  $('usersAddPanel').hidden = name !== 'add';
+  $('addUserBtn').hidden = name !== 'add';
+}
 async function openUsers() {
   const { data, error } = await sb.from('profiles').select('*').order('created_at');
   if (error) { showToast('Could not load users. ' + error.message); return; }
@@ -1523,6 +1608,7 @@ async function openUsers() {
   }));
   $('usersError').textContent = '';
   $('usersBusy').textContent = '';
+  setUsersTab('list');
   if (!$('usersDialog').open) $('usersDialog').showModal();
 }
 async function addAccount() {
@@ -1597,6 +1683,7 @@ async function saveAccount() {
 
 // ---------- wiring + boot ----------
 function wireStatic() {
+  $('toast').addEventListener('click', () => { clearTimeout(showToast._t); $('toast').classList.remove('show'); });
   $('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     $('loginError').textContent = '';
@@ -1796,6 +1883,7 @@ function wireStatic() {
   // users + account dialogs
   $('usersClose').addEventListener('click', () => $('usersDialog').close());
   $('usersDone').addEventListener('click', () => $('usersDialog').close());
+  $$('[data-users-tab]').forEach((b) => b.addEventListener('click', () => setUsersTab(b.dataset.usersTab)));
   $('addUserBtn').addEventListener('click', addAccount);
   $('accountClose').addEventListener('click', () => $('accountDialog').close());
   $('accountCancel').addEventListener('click', () => $('accountDialog').close());
