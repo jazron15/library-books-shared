@@ -201,6 +201,16 @@ body.gated main,body.gated .adminbar,body.gated .toast{display:none}
 .review-row .review-actions button, .review-row .review-actions label { font: inherit; font-size: .88rem; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
 .review-row .review-error { color: var(--red); font-size: .88rem; margin: 6px 0 0; }
 
+/* Detail dialog: never let a field force the dialog wider than the screen.
+   (Fix, 2026-11-05: the edit screen blew out sideways because the title
+   input sat inside the giant <h2> font with no width rule. The markup now
+   uses the family app's labelled field-input fields; these guards are the
+   backstop so an unstyled field can never do it again.) */
+.detail, .detail-body, .detail-visual { min-width: 0; }
+.detail-body input, .detail-body textarea { max-width: 100%; box-sizing: border-box; }
+.edit-status { color: var(--muted, #5b7285); font-size: .9rem; min-height: 1.2em; }
+.edit-error { color: var(--red); font-size: .9rem; min-height: 1.2em; }
+
 /* Shelf card tags */
 .book-marks { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
 .tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: var(--green-soft, #e2f5e9); color: #1d6b38; }
@@ -567,9 +577,12 @@ function mapBook(row) {
   };
 }
 function nicknameOf(userId) {
-  if (userId === myId()) return me ? (me.child_nickname || 'My child') : 'My child';
+  if (userId === myId()) return me && me.child_nickname ? me.child_nickname : 'You';
   const p = profiles.get(userId);
-  return p ? (p.child_nickname || 'A child') : 'A child';
+  if (!p) return 'A parent';
+  if (p.child_nickname) return p.child_nickname;
+  if (p.email) return p.email.split('@')[0];
+  return 'A parent';
 }
 
 // ---------- CSV (RFC 4180) ----------
@@ -884,19 +897,20 @@ function metaRow(label, value) {
   return '<div><dt>' + escapeHtml(label) + '</dt><dd>' + escapeHtml(value || '—') + '</dd></div>';
 }
 function metaRowEdit(label, id, type, value) {
-  return '<div><dt><label for="' + id + '">' + escapeHtml(label) + '</label></dt><dd>'
-    + '<input id="' + id + '" type="' + type + '" value="' + escapeHtml(value || '') + '"></dd></div>';
+  return '<div><dt><label class="edit-label" for="' + id + '">' + escapeHtml(label) + '</label></dt><dd>'
+    + '<input class="field-input" id="' + id + '" type="' + type + '" value="' + escapeHtml(value || '') + '"></dd></div>';
 }
 function detailVisualHtml(b, editing) {
   let html = coverHtml(b, stagedCover && stagedCover.preview ? stagedCover.preview : null);
   if (editing) {
-    html += '<div class="cover-stage">'
-      + '<label class="cover-stage-label" for="coverFile">Cover image</label>'
-      + '<input id="coverFile" type="file" accept="image/jpeg,image/png,image/webp">'
-      + '<div class="cover-stage-row"><input id="coverUrl" type="url" placeholder="Or paste an image link">'
-      + '<button class="action" id="stageCoverLink" type="button">Use link</button></div>'
-      + ((b.cover_key || stagedCover) ? '<button class="action" id="removeCover" type="button">Remove cover</button>' : '')
-      + '<p class="cover-stage-status" id="uploadStatus" role="status"></p></div>';
+    html += '<section class="cover-editor" aria-label="Change the cover"><h3>Change the cover</h3>'
+      + '<p>Choose a file or paste a link. The new cover is staged here and saved when you save the book.</p>'
+      + '<div class="upload-grid"><label for="coverFile">Upload image</label>'
+      + '<input class="file-input" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp">'
+      + '<input class="url-input" id="coverUrl" type="url" placeholder="Paste a direct image URL" aria-label="Direct image URL">'
+      + '<button class="action primary" id="stageCoverLink" type="button">Use link</button></div>'
+      + ((b.cover_key || stagedCover) ? '<button class="action danger-outline" id="removeCover" type="button">Remove cover</button>' : '')
+      + '<span class="upload-status" id="uploadStatus" aria-live="polite"></span></section>';
   }
   return '<div class="detail-visual">' + html + '</div>';
 }
@@ -950,10 +964,15 @@ function detailBodyHtml(b, values, editing) {
   else if (editing) html += '<p class="edit-hint">Editing — changes are not saved until you save them.</p>';
   if (!addingBook) html += '<span class="detail-kicker">' + escapeHtml(b.language) + ' book</span>';
   if (editing) {
-    html += '<h2><input id="efTitleEn" value="' + escapeHtml(v.title_en) + '" placeholder="English title" aria-label="English title"></h2>'
-      + '<p class="detail-author"><input id="efTitleZh" value="' + escapeHtml(v.title_zh) + '" placeholder="Chinese title" aria-label="Chinese title"></p>'
-      + '<dl class="detail-meta">'
-      + '<div><dt><label for="efAuthor">Author</label></dt><dd><input id="efAuthor" value="' + escapeHtml(v.author) + '"></dd></div>'
+    // Titles are plain labelled fields, NOT inside the <h2>: an input inside
+    // the giant heading font blows the dialog out sideways (see fix, Nov 5).
+    html += '<label class="edit-label" for="efTitleEn">Title (English)</label>'
+      + '<input class="field-input" id="efTitleEn" type="text" value="' + escapeHtml(v.title_en) + '">'
+      + '<label class="edit-label" for="efTitleZh">Title (Chinese)</label>'
+      + '<input class="field-input" id="efTitleZh" type="text" value="' + escapeHtml(v.title_zh) + '">'
+      + '<label class="edit-label" for="efAuthor">Author</label>'
+      + '<input class="field-input" id="efAuthor" type="text" value="' + escapeHtml(v.author) + '">'
+      + '<dl class="metadata">'
       + metaRowEdit('HKPL Serial Number' + (addingBook ? ' (optional)' : ''), 'efHkplSerialNumber', 'text', b.serial)
       + metaRowEdit('ISBN-13', 'efIsbn', 'text', b.isbn)
       + '<div><dt>Added</dt><dd>' + escapeHtml(addingBook ? 'Today' : fmtDate(b.addedOn)) + '</dd></div>'
@@ -963,9 +982,11 @@ function detailBodyHtml(b, values, editing) {
       + metaRowEdit('Publisher', 'efPublisher', 'text', v.publisher)
       + metaRowEdit('Notes', 'efNotes', 'text', v.notes)
       + '</dl>'
-      + '<section class="research"><h3>Story reminder</h3>'
-      + '<label for="efStoryEn">English</label><textarea id="efStoryEn">' + escapeHtml(v.story_en) + '</textarea>'
-      + '<label for="efStoryZh">Traditional Chinese</label><textarea id="efStoryZh">' + escapeHtml(v.story_zh) + '</textarea></section>'
+      + '<div class="story-card"><h3>Story reminder</h3>'
+      + '<label class="edit-label" for="efStoryEn">Story (English) — max 100 words</label>'
+      + '<textarea class="field-input" id="efStoryEn" rows="4">' + escapeHtml(v.story_en) + '</textarea>'
+      + '<label class="edit-label" for="efStoryZh">Story (Chinese) — max 100 characters</label>'
+      + '<textarea class="field-input" id="efStoryZh" rows="4">' + escapeHtml(v.story_zh) + '</textarea></div>'
       + '<p class="edit-status" id="editStatus" aria-live="polite"></p>'
       + '<p class="edit-error" id="editError" role="alert"></p>'
       + '<div class="detail-actions">' + (addingBook ? '' : '<button class="action danger" id="deleteBook" type="button">Delete book</button>')
@@ -973,10 +994,10 @@ function detailBodyHtml(b, values, editing) {
       + '<button class="action primary" id="saveEdits" type="button">' + (addingBook ? 'Add book' : 'Save changes') + '</button></div>';
   } else {
     const tag = tags.get(b.id);
-    html += '<h2>' + escapeHtml(b.title) + '</h2>'
-      + (b.altTitle ? '<p class="detail-alt">' + escapeHtml(b.altTitle) + '</p>' : '')
-      + '<p class="detail-author">' + escapeHtml(b.author || 'Unknown author') + '</p>'
-      + '<dl class="detail-meta">'
+    html += '<h2 id="detailTitle">' + escapeHtml(b.title) + '</h2>'
+      + (b.altTitle ? '<p class="detail-author">Also titled: ' + escapeHtml(b.altTitle) + '</p>' : '')
+      + '<p class="detail-author">by ' + escapeHtml(b.author || 'Unknown author') + '</p>'
+      + '<dl class="metadata">'
       + metaRow('HKPL Serial Number', b.serial)
       + metaRow('ISBN-13', b.isbn)
       + metaRow('Added', fmtDate(b.addedOn))
