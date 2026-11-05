@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Shared Library Books</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{color-scheme:light;--sky:#48aee6;--sky-deep:#1686c4;--sky-soft:#dff4ff;--cloud:#fffdf5;--ink:#173f5a;--muted:#536b7a;--red:#d93432;--red-deep:#a81f25;--yellow:#ffd43d;--yellow-deep:#e7a819;--blue-book:#1656a3;--green:#24835a;--green-soft:#dff3e8;--line:#b7dced;--card:#fffdf7;--panel:#effaff;--shadow:0 16px 0 rgba(20,92,135,.15),0 22px 42px rgba(11,74,111,.18);--focus:#7b1720}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--sky);color:var(--ink);font-family:"Fredoka","Noto Sans TC",sans-serif;line-height:1.5}button,input,select{font:inherit}button,select{color:inherit}button{cursor:pointer}:focus-visible{outline:4px solid var(--focus);outline-offset:3px}.shell{width:min(1180px,calc(100% - 40px));margin:0 auto}.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:34px;align-items:center;padding:52px 0 34px}.rainbow{display:flex;gap:5px;width:max-content;margin-bottom:13px;transform:rotate(-4deg)}.rainbow span{display:block;width:38px;height:12px;border-radius:999px}.rainbow span:nth-child(1){background:var(--red)}.rainbow span:nth-child(2){background:var(--yellow)}.rainbow span:nth-child(3){background:#49a760}.hero h1{margin:0;max-width:790px;color:var(--red);font:700 clamp(3rem,8vw,6.7rem)/.87 "Fredoka","Noto Sans TC",sans-serif;letter-spacing:-.045em;-webkit-text-stroke:5px var(--cloud);paint-order:stroke fill;filter:drop-shadow(0 6px 0 rgba(141,61,32,.22))}.hero h1 span{color:var(--yellow)}.hero-copy{max-width:700px;margin:23px 0 0;color:var(--cloud);font-size:clamp(1rem,2vw,1.23rem);font-weight:600;text-shadow:0 2px 0 rgba(10,80,120,.24)}.mascot{align-self:end;width:100%;filter:drop-shadow(0 12px 0 rgba(23,88,122,.16))}.controls-wrap{position:sticky;top:0;z-index:10;padding:12px 0;background:color-mix(in srgb,var(--sky) 88%,transparent);backdrop-filter:blur(13px)}.controls-card{padding:12px;border:4px solid var(--cloud);border-radius:26px;background:var(--panel);box-shadow:0 8px 0 rgba(18,99,143,.2)}.controls{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;align-items:end}.search{position:relative;grid-column:span 4}.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;color:var(--red);pointer-events:none}.search input,select,.url-input,.file-input{width:100%;min-height:48px;border:2px solid var(--line);border-radius:15px;background:var(--card);color:var(--ink)}.search input{padding:0 44px}.search input::placeholder,.url-input::placeholder{color:var(--muted);opacity:.88}select{min-width:166px;padding:0 38px 0 14px}.filter-select{display:grid;gap:4px;min-width:0}.filter-select>span{color:var(--muted);font-size:.72rem;font-weight:700;padding-left:4px}.filter-select select{min-width:0}.sort-field{grid-column:span 2}.report-filter{grid-column:span 3}.date-filter{grid-column:span 3}.export-actions{display:flex;gap:7px}.action{min-height:48px;border:2px solid var(--line);border-radius:15px;background:var(--card);color:var(--ink);padding:0 14px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:.82rem;font-weight:700;white-space:nowrap}.action:hover{border-color:var(--red);color:var(--red)}.action.primary{border-color:var(--red-deep);background:var(--red);color:#fff}.action svg{width:16px;height:16px}.view-toggle{display:flex;border:2px solid var(--line);border-radius:15px;background:var(--card);padding:3px}.view-toggle button{width:40px;height:40px;border:0;border-radius:10px;background:transparent;color:var(--muted);display:grid;place-items:center}.view-toggle button.active{background:var(--yellow);color:#5e3c00}.view-toggle svg{width:18px;height:18px}.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin:18px auto 28px}.chip{border:3px solid var(--cloud);border-radius:999px;background:transparent;color:var(--cloud);padding:8px 16px;font-weight:700}.chip.active{border-color:var(--yellow);background:var(--yellow);color:#684300}.results-meta{margin-left:auto;align-self:center;color:var(--cloud);font-size:.88rem;font-weight:600}.books{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px;padding-bottom:58px}.book{min-width:0}.cover-button{width:100%;height:100%;border:4px solid var(--cloud);border-radius:25px;background:var(--card);padding:12px;color:inherit;text-align:left;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}.cover-button:hover{transform:translateY(-4px);box-shadow:0 20px 0 rgba(20,92,135,.15),0 28px 50px rgba(11,74,111,.22)}.cover-frame{position:relative;aspect-ratio:5/7;overflow:hidden;border-radius:14px 21px 21px 14px;background:var(--sky-soft)}.cover-frame::before{content:"";position:absolute;z-index:2;inset:0 auto 0 0;width:7px;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.12),transparent)}.cover-frame img{width:100%;height:100%;object-fit:cover;display:block}.cover-unavailable{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:22px 18px;background:linear-gradient(150deg,var(--sky-soft),var(--panel))}.cover-title{font:700 clamp(1.35rem,2.7vw,2.15rem)/1 "Fredoka","Noto Sans TC",sans-serif;color:var(--red);letter-spacing:-.025em}.cover-mark{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--yellow);color:#714600}.cover-mark svg{width:30px}.cover-note{color:var(--muted);font-size:.72rem}.book-text{padding:17px 5px 3px}.book h2{margin:0;font:700 clamp(1.08rem,2vw,1.3rem)/1.13 "Fredoka","Noto Sans TC",sans-serif;color:var(--red)}.author{color:var(--muted);margin:5px 0 13px;font-size:.84rem}.book-foot{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.borrowed{color:var(--muted);font-size:.73rem}.status{color:var(--green);background:var(--green-soft);border-radius:999px;padding:4px 8px;font-size:.66rem;font-weight:700;white-space:nowrap}.books.list{grid-template-columns:1fr;gap:13px}.books.list .cover-button{display:grid;grid-template-columns:80px minmax(0,1fr);gap:18px;align-items:center;padding:13px}.books.list .cover-frame{width:80px;height:108px}.books.list .book-text{padding:0}.empty{display:none;padding:70px 20px 90px;text-align:center;border:4px solid var(--cloud);border-radius:24px;background:var(--card);margin-bottom:60px}.empty h2{font:700 2rem/1 "Fredoka",sans-serif;color:var(--red);margin:0 0 10px}.empty p{color:var(--muted);margin:0}.notes{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;border:4px solid var(--cloud);border-radius:28px 28px 0 0;padding:28px 30px 35px;background:var(--card)}.notes h2{font:700 1.45rem/1.1 "Fredoka",sans-serif;color:var(--red);margin:0 0 9px}.notes p{color:var(--muted);margin:0;font-size:.86rem}.notes strong{color:var(--ink)}
+    .collection-toggle-row{display:flex;justify-content:flex-end}.collection-toggle{width:auto;min-width:190px;min-height:48px;border:4px solid var(--cloud);border-radius:18px;background:var(--yellow);color:#5c3b00;padding:0 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;box-shadow:0 7px 0 rgba(18,99,143,.2)}.collection-toggle span{display:flex;align-items:center;gap:9px}.collection-toggle svg{width:20px;height:20px}.collection-toggle .chevron{transition:transform .25s ease}.collection-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}.collection-panel{max-height:1000px;opacity:1;overflow:hidden;transition:max-height .32s ease,opacity .22s ease,margin .32s ease}.collection-panel.collapsed{max-height:0;opacity:0;pointer-events:none;margin-top:-4px}
+    .edit-entry{min-width:190px;grid-column:span 4}.export-actions{grid-column:span 4}.view-toggle{grid-column:span 4;justify-self:end}.edit-entry[aria-pressed="true"]{border-color:var(--red-deep);background:var(--red);color:#fff}.edit-entry svg{width:17px}.edit-banner{display:none;align-items:center;gap:12px;margin:0 auto 22px;padding:14px 16px;border:4px solid var(--cloud);border-radius:22px;background:var(--yellow);color:#5c3b00;box-shadow:0 8px 0 rgba(18,99,143,.2)}.edit-banner.show{display:flex}.edit-banner p{flex:1;margin:0;font-size:.82rem;font-weight:600}.edit-banner-actions{display:flex;gap:8px;flex-wrap:wrap}.edit-banner .action{border-color:#d09615;background:var(--card)}.book{position:relative}.book-edit{display:none;position:absolute;z-index:3;top:10px;right:10px;min-height:38px;border:3px solid var(--cloud);border-radius:999px;background:var(--red);color:#fff;padding:0 12px;align-items:center;gap:6px;font-weight:700;box-shadow:0 5px 0 rgba(100,26,29,.18)}.book-edit svg{width:15px;height:15px}.editing .book-edit{display:inline-flex}.edited-badge{position:absolute;z-index:2;left:10px;top:10px;border:3px solid var(--cloud);border-radius:999px;background:var(--green);color:#fff;padding:5px 9px;font-size:.65rem;font-weight:700;box-shadow:0 4px 0 rgba(20,92,135,.14)}
+    .edit-dialog{width:min(760px,calc(100% - 24px))}.editor-body{padding:48px 34px 32px}.editor-heading{padding-right:55px}.editor-heading h2{margin:0;color:var(--red);font:700 clamp(1.8rem,5vw,2.8rem)/1 "Fredoka","Noto Sans TC",sans-serif;letter-spacing:-.03em}.editor-heading p{margin:7px 0 0;color:var(--muted);font-size:.8rem}.edit-field{margin-top:18px}.edit-field label,.edit-field-title{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:7px;color:var(--ink);font-weight:700}.counter{color:var(--muted);font-size:.72rem;font-weight:600;white-space:nowrap}.counter.over{color:var(--red)}.edit-field textarea{width:100%;min-height:118px;resize:vertical;border:2px solid var(--line);border-radius:15px;background:var(--panel);color:var(--ink);padding:12px;font:500 .9rem/1.55 "Fredoka","Noto Sans TC",sans-serif}.edit-field textarea.comment-input{min-height:94px}.edit-field textarea[aria-invalid="true"]{border-color:var(--red);background:#fff4f3}.editor-comments{display:grid;grid-template-columns:1fr 1fr;gap:14px}.editor-child{margin-top:18px;padding:15px;border:2px solid var(--line);border-radius:18px;background:var(--panel)}.editor-child .edit-field{margin-top:12px}.editor-child h3{margin:0;color:var(--red);font:700 1.08rem/1.2 "Fredoka","Noto Sans TC",sans-serif}.editor-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:22px;padding-top:18px;border-top:2px solid var(--line)}.editor-actions .action{min-width:108px}.editor-error{min-height:1.25em;margin:9px 0 0;color:var(--red);font-size:.76rem;text-align:right}.send-body{padding:48px 34px 32px}.send-body h2,.reset-body h2{margin:0 0 8px;color:var(--red);font:700 2rem/1 "Fredoka","Noto Sans TC",sans-serif}.send-body p,.reset-body p{margin:0 0 15px;color:var(--muted);font-size:.84rem}.send-output{width:100%;min-height:280px;resize:vertical;border:2px solid var(--line);border-radius:15px;background:var(--panel);color:var(--ink);padding:13px;font:500 .82rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.reset-body{padding:45px 30px 28px}.reset-dialog{width:min(480px,calc(100% - 24px))}
+    dialog{width:min(980px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:0;border:4px solid var(--cloud);border-radius:28px;background:var(--card);color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.38);overflow:auto}dialog::backdrop{background:rgba(3,36,57,.75);backdrop-filter:blur(5px)}.dialog-close{position:sticky;float:right;top:12px;margin:12px 12px -58px 0;z-index:4;width:44px;height:44px;border:3px solid var(--line);border-radius:50%;background:var(--yellow);color:#633c00;display:grid;place-items:center}.dialog-close svg{width:20px}.detail{display:grid;grid-template-columns:minmax(250px,36%) 1fr;min-height:650px}.detail-visual{padding:38px;display:grid;align-content:start;gap:18px;background:var(--sky-soft)}.detail-visual .cover-frame{width:min(100%,280px);margin:0 auto;box-shadow:0 14px 0 rgba(24,95,130,.12)}.detail-body{padding:50px 42px 40px}.detail-kicker{display:inline-block;color:#664200;background:var(--yellow);border-radius:999px;padding:5px 10px;font-weight:700;font-size:.72rem}.detail h2{margin:10px 0 5px;font:700 clamp(2.15rem,6vw,3.8rem)/.94 "Fredoka","Noto Sans TC",sans-serif;letter-spacing:-.04em;color:var(--red)}.detail-author{color:var(--muted);margin:0 0 22px}.metadata{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metadata div{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0}.metadata dt{color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.07em}.metadata dd{margin:3px 0 0;font-size:.82rem;word-break:break-word}.report-panel{margin-top:20px;padding:15px;background:var(--green-soft);border-radius:18px}.report-panel h3,.research h3{font:700 1.16rem/1.2 "Fredoka","Noto Sans TC",sans-serif;margin:0;color:var(--red)}.session-note{margin:5px 0 12px;color:var(--muted);font-size:.76rem}.report-switches{display:grid;grid-template-columns:1fr 1fr;gap:9px}.report-switch{min-height:48px;border:2px solid color-mix(in srgb,var(--green) 45%,var(--line));border-radius:14px;background:var(--card);color:var(--ink);padding:8px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:700}.report-switch::after{content:"Not submitted";font-size:.67rem;color:var(--muted)}.report-switch[aria-checked="true"]{background:var(--green);border-color:var(--green);color:#fff}.report-switch[aria-checked="true"]::after{content:"Submitted";color:#fff}.cover-editor{margin-top:18px;padding:15px;border-radius:18px;background:var(--sky-soft)}.cover-editor h3{margin:0 0 4px;font:700 1.15rem/1.1 "Fredoka",sans-serif;color:var(--red)}.cover-editor p{margin:0 0 12px;color:var(--muted);font-size:.77rem}.upload-grid{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.file-input{grid-column:1/-1;min-height:auto;padding:9px;font-size:.76rem}.url-input{padding:0 11px}.upload-status{display:block;min-height:1.2em;margin-top:8px;color:var(--muted);font-size:.72rem}.research{margin-top:24px}.story-card,.comment-card{border:2px solid var(--line);border-radius:18px;padding:16px;background:var(--panel)}.story-card p,.comment-card p{margin:8px 0 0;color:var(--ink);font-size:.9rem}.comments-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.comment-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.comment-title small{display:block;color:var(--muted);font-size:.68rem;font-weight:500}.lang-toggle{display:flex;padding:3px;border:2px solid var(--line);border-radius:999px;background:var(--card)}.lang-toggle button{min-width:38px;height:28px;padding:0 8px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:.68rem;font-weight:700}.lang-toggle button.active{background:var(--yellow);color:#613d00}.toast{position:fixed;right:20px;bottom:20px;z-index:30;max-width:min(380px,calc(100% - 40px));padding:12px 15px;border:3px solid var(--cloud);border-radius:15px;background:var(--red);color:#fff;box-shadow:var(--shadow);font-size:.78rem;opacity:0;transform:translateY(12px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:1080px){.search{grid-column:1/-1}.sort-field,.report-filter,.date-filter{grid-column:span 4}}
+    @media(max-width:930px){.books{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:minmax(0,1fr) 220px}.detail{grid-template-columns:250px 1fr}.detail-visual{padding:28px}.detail-body{padding:48px 30px 32px}.comments-grid{grid-template-columns:1fr}}
+    @media(max-width:680px){.shell{width:min(100% - 26px,1180px)}.hero{grid-template-columns:minmax(0,1fr) 120px;gap:10px;padding:34px 0 22px}.hero h1{font-size:clamp(3rem,15vw,4.7rem);-webkit-text-stroke:3px var(--cloud)}.hero-copy{grid-column:1/-1;margin-top:12px}.mascot{align-self:end}.collection-toggle-row{display:block}.collection-toggle{width:100%;min-width:0}.controls-wrap{padding-top:8px}.controls{grid-template-columns:minmax(0,1fr)}.controls>*{grid-column:1!important;grid-row:auto!important}.controls select{min-width:0}.view-toggle{width:max-content!important;justify-self:start}.edit-entry{width:100%}.export-actions .action{flex:1}.edit-banner{align-items:stretch;flex-direction:column}.edit-banner-actions .action{flex:1}.filter-row{margin:12px auto 22px}.results-meta{order:9;width:100%;margin:4px 0 0}.books{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.cover-button{padding:8px;border-width:3px;border-radius:19px}.book-text{padding:13px 3px 3px}.book-foot{align-items:flex-start;flex-direction:column;gap:6px}.notes{grid-template-columns:1fr;padding:24px 20px}.detail{grid-template-columns:1fr}.detail-visual{padding:24px 70px}.detail-visual .cover-frame{max-width:220px}.detail-body{padding:30px 20px 26px}.metadata{grid-template-columns:1fr 1fr}.report-switches{grid-template-columns:1fr}.editor-comments{grid-template-columns:1fr}.editor-body,.send-body{padding:42px 18px 24px}.editor-actions{flex-direction:column-reverse}.editor-actions .action{width:100%}}
+    @media(max-width:410px){.hero{grid-template-columns:minmax(0,1fr) 94px}.hero h1{font-size:2.8rem}.books{gap:14px 9px}.book h2{font-size:.98rem}.author{font-size:.75rem}.status{font-size:.6rem}.detail-visual{padding-inline:52px}.upload-grid{grid-template-columns:1fr}.upload-grid .action{width:100%}.metadata{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cover-button,.toast,.collection-toggle .chevron,.collection-panel{transition:none}}
+/* Front-door password gate: the whole library sits behind it. While the
+   body carries .gated, only the gate screen shows. */
+#gate{display:none}
+body.gated #gate{display:grid;min-height:100dvh;place-items:center;padding:28px 16px 52px}
+body.gated main,body.gated .adminbar,body.gated .toast{display:none}
+.gate-inner{width:min(480px,100%);text-align:center}
+.gate-mascot{width:150px;margin:0 auto 4px;display:block;filter:drop-shadow(0 12px 0 rgba(23,88,122,.16))}
+.gate h1{margin:0;color:var(--red);font:700 2.5rem/.95 "Fredoka","Noto Sans TC",sans-serif;letter-spacing:-.03em;-webkit-text-stroke:3px var(--cloud);paint-order:stroke fill;filter:drop-shadow(0 4px 0 rgba(141,61,32,.22))}
+.gate h1 span{color:var(--yellow)}
+.gate-copy{color:var(--cloud);font-weight:600;margin:12px 0 18px;text-shadow:0 2px 0 rgba(10,80,120,.24)}
+.gate-card{background:#fffdf7;border:4px solid var(--cloud);border-radius:26px;box-shadow:0 8px 0 rgba(18,99,143,.2);padding:20px;text-align:left}
+.gate-card label{display:block;font-weight:600;margin-bottom:4px;color:var(--ink)}
+.gate-card input[type=password]{width:100%;border:2px solid #b7dced;border-radius:12px;padding:11px 12px;background:#fff;font:inherit;color:var(--ink)}
+.gate-card .error{color:#a81f25;font-weight:600;min-height:1.4em;margin:6px 0 0}
+.gate-submit{width:100%;margin-top:12px;min-height:52px;font-size:.95rem}
+
+/* Admin additions for the Cloudflare draft. Base design (Reading Duck) is unchanged. */
+
+.adminbar{position:sticky;top:0;z-index:40;background:rgba(23,63,90,.92);color:#fff}
+.adminbar-inner{width:min(1180px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 0;flex-wrap:wrap}
+.adminbar .brand{font-weight:700;letter-spacing:.01em;margin-right:auto}
+.adminbar .pill{background:#ffd43d;color:#173f5a;border-radius:999px;padding:2px 10px;font-weight:700;font-size:.85rem}
+.adminbtn{border:2px solid #fff;background:transparent;color:#fff;border-radius:999px;padding:5px 14px;font-weight:600}
+.adminbtn.danger{background:#a81f25;border-color:#a81f25}
+.adminbtn:hover{background:rgba(255,255,255,.16)}
+.adminbtn.danger:hover{background:#8f1d1d}
+.adminbtn.primary{background:#ffd43d;color:#173f5a;border-color:#ffd43d}
+.adminbtn:disabled{opacity:.55;cursor:default}
+.demo-banner{background:#fff4f3;color:#7b1720;border:3px dashed #d93432;border-radius:14px;padding:10px 14px;margin:16px auto 0;width:min(1180px,calc(100% - 40px));font-weight:600}
+.admin-dialog{border:0;border-radius:18px;padding:0;max-width:720px;width:calc(100% - 32px);background:#fffdf7;color:#173f5a;box-shadow:0 22px 42px rgba(11,74,111,.35)}
+.admin-dialog::backdrop{background:rgba(23,63,90,.55)}
+.admin-dialog .dlg-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 20px 0}
+.admin-dialog .dlg-head h2{margin:0;font-size:1.4rem;flex:1;min-width:0}
+.admin-dialog .dialog-close{position:static;float:none;margin:0;flex:none}
+.action:disabled{opacity:.45;cursor:not-allowed}
+.admin-dialog .busy{color:var(--muted);font-weight:600;min-height:1.4em}
+.adminbar-bottom{position:static;margin-top:28px}
+.admin-dialog .dlg-body{padding:14px 20px 20px}
+.admin-dialog label{display:block;font-weight:600;margin:10px 0 4px}
+.admin-dialog input[type=password],.admin-dialog input[type=file],.admin-dialog input[type=text],.admin-dialog input[type=date]{width:100%;border:2px solid #b7dced;border-radius:12px;padding:9px 12px;background:#fff;font:inherit}
+.admin-dialog textarea{width:100%;border:2px solid #b7dced;border-radius:12px;padding:9px 12px;background:#fff;font:inherit;resize:vertical}
+.admin-dialog h3{margin:18px 0 0;font-size:1.05rem;color:var(--ink)}
+.admin-dialog .dlg-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.admin-dialog .error{color:#a81f25;font-weight:600;min-height:1.4em}
+.preview-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+.preview-table th,.preview-table td{border-bottom:1px solid #b7dced;padding:6px 8px;text-align:left;vertical-align:top}
+.preview-table th{background:#effaff}
+.badge{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.8rem;font-weight:700}
+.badge.new{background:#dff3e8;color:#24835a}
+.badge.dup{background:#fff4f3;color:#a81f25}
+.badge.warn{background:#fff8e1;color:#8a6d00}
+.review-row{display:flex;flex-direction:column;border:2px solid #b7dced;border-radius:14px;padding:12px 14px;margin-top:10px;background:#fff}
+.review-row .review-info{min-width:0;overflow-wrap:break-word}
+.review-row .meta{font-size:.9rem;color:#536b7a}
+.review-row .row-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.review-row .row-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.review-row .row-link{display:flex;gap:8px;margin-top:8px}
+.review-row .row-link .url-input{flex:1;min-width:0}
+.review-row .row-status{display:block;min-height:1.2em;margin-top:6px;color:var(--muted);font-size:.78rem;font-weight:600}
+.report-switch[disabled]{opacity:.55;cursor:not-allowed}
+/* Detail dialog view/edit modes: edit mode keeps the same layout, with a
+   warmer dialog background so the mode is obvious at a glance. */
+#bookDialog.editing{background:#fff6d6}
+.mode-toggle{display:flex;border:2px solid var(--line);border-radius:15px;background:var(--card);padding:3px;width:max-content;margin:0 0 14px auto}
+.mode-toggle button{min-height:36px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer}
+.mode-toggle button.active{background:var(--yellow);color:#5e3c00}
+.edit-hint{font-size:.78rem;font-weight:700;color:#8a6d00;margin:-6px 0 12px;text-align:right}
+.detail .field-input{width:100%;border:2px solid var(--line);border-radius:12px;padding:9px 11px;background:#fff;font:inherit;font-size:.9rem;color:var(--ink)}
+.detail textarea.field-input{resize:vertical;min-height:64px}
+.detail .edit-label{display:block;font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:12px 0 3px}
+.detail .metadata .edit-label{margin:0}
+.detail .metadata dd .field-input{padding:7px 9px;font-size:.85rem}
+.detail-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
+.detail-actions .danger{margin-right:auto}
+.action.danger{border-color:#8f1d1d;background:#a81f25;color:#fff}
+.action.danger:hover{border-color:#8f1d1d;color:#fff}
+.action.danger-outline{border-color:#a81f25;background:#fff;color:#a81f25;margin-top:10px}
+.action.danger-outline:hover{border-color:#8f1d1d;color:#8f1d1d}
+#unsavedDialog{max-width:520px}
+#deleteDialog{max-width:520px}
+.report-switch{flex-direction:column;align-items:stretch;gap:2px}
+.report-switch::after{content:none}
+.report-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.report-state{font-size:.67rem;color:var(--muted);font-weight:700;white-space:nowrap}
+.report-switch[aria-checked="true"] .report-state{color:#fff}
+.report-time{display:block;font-size:.68rem;color:var(--muted);font-weight:600;text-align:left}
+.report-switch[aria-checked="true"] .report-time{color:rgba(255,255,255,.85)}
+/* Cover-preview link row: single column so the URL box gets the full width and
+   the whole "Paste a direct image URL" instruction shows (it was squeezed
+   beside the Import button in the narrow detail column). */
+.upload-grid{grid-template-columns:minmax(0,1fr)}
+.upload-grid>*{min-width:0}
+.upload-grid #importUrl{width:100%}
+.lock-note{font-size:.85rem;color:#536b7a}
+.cover-placeholder-mark{display:flex;align-items:center;justify-content:center;height:100%;background:#dff4ff;color:#1686c4;font-weight:700;text-align:center;padding:10px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------------- library dashboard: one full-width card, hairline dividers ---------------- */
+.dashboard{grid-column:1/-1;margin:0;overflow:hidden;border:4px solid var(--cloud);border-radius:24px;background:var(--card);box-shadow:0 8px 0 rgba(18,99,143,.2)}
+.dashboard-toggle{width:100%;min-height:52px;border:0;border-radius:0;background:transparent;color:var(--ink);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left}
+.dashboard-toggle[aria-expanded="true"]{border-bottom:3px solid var(--cloud)}
+.dashboard-toggle:focus-visible{outline:4px solid var(--focus);outline-offset:-4px}
+.dashboard-title{display:flex;flex-direction:column;gap:1px}
+.dashboard-title strong{color:var(--red);font-size:1.02rem}
+.dashboard-title span{color:var(--muted);font-size:.74rem;font-weight:600}
+.dashboard-toggle .chevron{width:20px;height:20px;flex:none;color:var(--red);transition:transform .25s ease}
+.dashboard-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}
+.dashboard-panel{max-height:800px;opacity:1;overflow:hidden;transition:max-height .32s ease,opacity .22s ease}
+.dashboard-panel.collapsed{max-height:0;opacity:0;pointer-events:none}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin:0;background:var(--line)}
+.stat{background:var(--card);padding:14px 16px}
+.stat dt{color:var(--muted);font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.stat dd{margin:3px 0 0;color:var(--ink);font-size:.82rem;font-weight:600}
+.stat dd b{color:var(--red);font-size:1.25rem}
+/* ---------------- possible-duplicate tag + note ---------------- */
+.dup-tag{position:absolute;z-index:3;top:8px;left:8px;background:var(--red);color:#fff;border:2px solid #fff;border-radius:999px;padding:2px 8px;font-size:.6rem;font-weight:700;white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.dup-note{margin:14px 0 0;padding:10px 12px;background:var(--panel);border:2px solid var(--yellow);border-radius:14px;color:var(--ink);font-size:.8rem}
+/* One note left in the footer aside (catalogue note removed): let it span the row. */
+.notes>div:only-child{grid-column:1/-1}
+@media(max-width:680px){
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{padding:10px 12px}
+  .stat dd b{font-size:1.1rem}
+}
+  
+/* Shared library additions on top of the family library styles. */
+.gate-links { margin: 10px 0 0; text-align: center; }
+.linklike { background: none; border: 0; color: var(--sky-deep); font: inherit; text-decoration: underline; cursor: pointer; padding: 4px; }
+.gate-card h2 { margin: 0 0 6px; font-size: 1.25rem; }
+.gate-card .hint { color: #5b7285; font-size: .92rem; }
+.hint { color: #5b7285; font-size: .92rem; }
+
+/* Users dialog */
+.users-dialog { max-width: 640px; }
+.users-dialog .dlg-body h3 { margin: 18px 0 8px; }
+.user-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 10px 2px; border-top: 1px solid var(--line); align-items: center; }
+.user-row:first-child { border-top: 0; }
+.user-row .who { font-weight: 700; }
+.user-row .meta { color: #5b7285; font-size: .9rem; }
+.user-row .role { font-size: .85rem; font-weight: 700; text-transform: capitalize; }
+.user-row .role.admin { color: var(--red); }
+.user-row .role.moderator { color: #8a5a00; }
+.user-row .role.user { color: #5b7285; }
+.user-row .user-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.user-row .user-actions select, .user-row .user-actions button { font: inherit; font-size: .88rem; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+.user-row.disabled { opacity: .55; }
+.user-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.user-form label { display: grid; gap: 4px; font-weight: 600; font-size: .92rem; }
+.user-form input { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; }
+@media (max-width: 560px) { .user-form { grid-template-columns: 1fr; } }
+
+/* Account dialog fields */
+#accountDialog label, #usersDialog .dlg-body > label { display: grid; gap: 4px; font-weight: 600; font-size: .92rem; margin: 10px 0; }
+#accountDialog input { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; }
+#accountDialog h3 { margin: 18px 0 4px; }
+
+/* Detail: tag + report panel, comments from all parents */
+.detail .tag-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 10px 0; }
+.detail .tag-row .tag-state { font-weight: 700; }
+.comments-list { display: grid; gap: 12px; margin-top: 8px; }
+.comment-card { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #fff; }
+.comment-card.mine { background: #fff8e1; border-color: #f0d48a; }
+.comment-card .comment-who { font-weight: 700; font-size: .92rem; }
+.comment-card .comment-who .you { color: var(--red); }
+.comment-card p { margin: 6px 0 0; }
+.comment-card .comment-actions { margin-top: 8px; display: flex; gap: 8px; }
+.comment-card .comment-actions button { font: inherit; font-size: .88rem; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+.comment-card .comment-actions button.danger { color: var(--red); border-color: #e8b4b3; }
+.comment-edit textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; margin: 6px 0; min-height: 64px; }
+.report-line { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+.report-line .last-update { color: #5b7285; font-size: .88rem; }
+
+/* Cover review rows reuse the family .review-row styles; keep rows roomy */
+.review-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); align-items: start; }
+.review-row:first-child { border-top: 0; }
+.review-row img { width: 64px; height: 88px; object-fit: cover; border-radius: 8px; background: #e8f2fa; }
+.review-row .review-title { font-weight: 700; }
+.review-row .review-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.review-row .review-actions button, .review-row .review-actions label { font: inherit; font-size: .88rem; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+.review-row .review-error { color: var(--red); font-size: .88rem; margin: 6px 0 0; }
+
+/* Shelf card tags */
+.book-marks { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: var(--green-soft, #e2f5e9); color: #1d6b38; }
+.tag.report { background: #fff3c4; color: #664200; }
+
+/* Upload preview table */
+#uploadPreview table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 10px; }
+#uploadPreview th, #uploadPreview td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+#uploadPreview .rejected { color: var(--red); }
+</style>
+</head>
+<body class="gated">
+  <section class="gate" id="gate" aria-labelledby="loginTitle">
+    <div class="gate-inner">
+      <svg class="mascot" viewBox="0 0 260 250" role="img" aria-label="A cheerful yellow duck reading a blue book"><ellipse cx="130" cy="222" rx="86" ry="19" fill="rgba(18,84,120,.2)"/><circle cx="131" cy="91" r="54" fill="#ffd43d" stroke="#934c25" stroke-width="7"/><path d="M103 64c13-16 35-19 53-6" fill="none" stroke="#fff2a2" stroke-width="8" stroke-linecap="round"/><circle cx="113" cy="89" r="6" fill="#243743"/><circle cx="153" cy="89" r="6" fill="#243743"/><path d="M126 104c10-9 26-7 34 2-8 10-24 13-34 3z" fill="#f1952f" stroke="#934c25" stroke-width="5"/><path d="M88 127c-27 11-36 35-23 55 10-8 22-12 35-12m75-43c27 11 36 35 23 55-10-8-22-12-35-12" fill="#ffd43d" stroke="#934c25" stroke-width="7" stroke-linecap="round"/><path d="M130 149c-28-20-56-20-80-9l13 68c24-9 46-3 67 13zm0 0c28-20 56-20 80-9l-13 68c-24-9-46-3-67 13z" fill="#2a6fc2" stroke="#173f79" stroke-width="7" stroke-linejoin="round"/><path d="M130 151v69" stroke="#fff" stroke-width="5" opacity=".6"/><path d="M101 188h-21m80 0h21" stroke="#d8ebff" stroke-width="5" stroke-linecap="round"/></svg>
+      <h1 id="loginTitle">Our shared <span>library</span></h1>
+      <p class="gate-copy">A library shared by our families. Log in with your child's account to come in.</p>
+      <form class="gate-card" id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" autocomplete="username" required>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required>
+        <p class="error" id="loginError" role="alert"></p>
+        <button class="action primary gate-submit" type="submit">Log in</button>
+        <p class="gate-links"><button class="linklike" id="forgotBtn" type="button">Forgot password?</button></p>
+      </form>
+      <form class="gate-card" id="resetForm" hidden>
+        <h2>Set a new password</h2>
+        <p>Choose a new password for this account.</p>
+        <label for="resetPassword">New password</label>
+        <input id="resetPassword" type="password" autocomplete="new-password" required minlength="6">
+        <label for="resetPassword2">Repeat new password</label>
+        <input id="resetPassword2" type="password" autocomplete="new-password" required minlength="6">
+        <p class="error" id="resetError" role="alert"></p>
+        <button class="action primary gate-submit" type="submit">Save new password</button>
+      </form>
+      <p class="gate-copy" id="forgotSent" hidden>If that email belongs to an account, a password-reset link is on its way. It works for one hour.</p>
+    </div>
+  </section>
+
+  <div class="adminbar" role="region" aria-label="Library administration">
+    <div class="adminbar-inner">
+      <span class="brand">Shared library</span>
+      <span class="pill" id="libraryCount">0 books in the library</span>
+      <span class="pill" id="roleState" hidden></span>
+      <button class="adminbtn" id="usersBtn" type="button" hidden>Users</button>
+      <button class="adminbtn" id="uploadCsvBtn" type="button" hidden>Upload CSV</button>
+      <button class="adminbtn" id="addBookBtn" type="button" hidden>Add book</button>
+      <button class="adminbtn" id="reviewCoversBtn" type="button" hidden>Cover review <span id="reviewCount"></span></button>
+      <button class="adminbtn" id="accountBtn" type="button" hidden>My account</button>
+      <button class="adminbtn danger" id="clearBtn" type="button" hidden>Clear library</button>
+      <button class="adminbtn" id="logoutBtn" type="button" hidden>Log out</button>
+    </div>
+  </div>
+  <main>
+    <section class="shell hero" aria-labelledby="page-heading">
+      <div><div class="rainbow" aria-hidden="true"><span></span><span></span><span></span></div><h1 id="page-heading">Our shared <span>library</span></h1></div>
+      <svg class="mascot" viewBox="0 0 260 250" role="img" aria-label="A cheerful yellow duck reading a blue book"><ellipse cx="130" cy="222" rx="86" ry="19" fill="rgba(18,84,120,.2)"/><circle cx="131" cy="91" r="54" fill="#ffd43d" stroke="#934c25" stroke-width="7"/><path d="M103 64c13-16 35-19 53-6" fill="none" stroke="#fff2a2" stroke-width="8" stroke-linecap="round"/><circle cx="113" cy="89" r="6" fill="#243743"/><circle cx="153" cy="89" r="6" fill="#243743"/><path d="M126 104c10-9 26-7 34 2-8 10-24 13-34 3z" fill="#f1952f" stroke="#934c25" stroke-width="5"/><path d="M88 127c-27 11-36 35-23 55 10-8 22-12 35-12m75-43c27 11 36 35 23 55-10-8-22-12-35-12" fill="#ffd43d" stroke="#934c25" stroke-width="7" stroke-linecap="round"/><path d="M130 149c-28-20-56-20-80-9l13 68c24-9 46-3 67 13zm0 0c28-20 56-20 80-9l-13 68c-24-9-46-3-67 13z" fill="#2a6fc2" stroke="#173f79" stroke-width="7" stroke-linejoin="round"/><path d="M130 151v69" stroke="#fff" stroke-width="5" opacity=".6"/><path d="M101 188h-21m80 0h21" stroke="#d8ebff" stroke-width="5" stroke-linecap="round"/></svg>
+      <section class="dashboard" id="dashboard" aria-label="Library statistics">
+        <button class="dashboard-toggle" id="dashboardToggle" type="button" aria-expanded="true" aria-controls="dashboardPanel"><span class="dashboard-title"><strong>Library at a glance</strong><span>Latest statistics for the shared library</span></span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="dashboard-panel" id="dashboardPanel"><dl class="stat-grid">
+          <div class="stat"><dt>Books in the library</dt><dd id="statTotal">–</dd></div>
+          <div class="stat"><dt>Families</dt><dd id="statFamilies">–</dd></div>
+          <div class="stat"><dt>My child's books read</dt><dd id="statMine">–</dd></div>
+          <div class="stat"><dt>My child's reports done</dt><dd id="statReports">–</dd></div>
+          <div class="stat"><dt>Read, no report yet</dt><dd id="statMineNoReport">–</dd></div>
+          <div class="stat"><dt>Covers to check</dt><dd id="statReview">–</dd></div>
+          <div class="stat"><dt>Placeholder covers</dt><dd id="statPlaceholder">–</dd></div>
+          <div class="stat"><dt>Possible duplicates</dt><dd id="statDupes">–</dd></div>
+          <div class="stat"><dt>Added this month</dt><dd id="statAddedMonth">–</dd></div>
+        </dl></div>
+      </section>
+    </section>
+    <section class="controls-wrap" aria-label="Collection controls"><div class="shell collection-toggle-row"><button class="collection-toggle" id="collectionToggle" type="button" aria-expanded="false" aria-controls="collectionPanel"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.7-3.7"/></svg><strong id="collectionToggleLabel">Hide search</strong></span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></div><div class="collection-panel collapsed" id="collectionPanel"><div class="shell controls-card"><div class="controls">
+      <label class="search"><span class="sr-only">Search books</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.7-3.7"/></svg><input id="search" type="search" placeholder="Search title, author, ISBN or HKPL Serial Number" autocomplete="off"></label>
+      <label class="filter-select sort-field"><span>Sort by</span><select id="sort"><option value="added">Newest added</option><option value="title">Title A–Z</option><option value="author">Author A–Z</option></select></label>
+      <label class="filter-select report-filter"><span>My child's books</span><select id="reportFilter"><option value="all">All books</option><option value="mine">Read by my child</option><option value="done">Report done</option><option value="notdone">Read, report not done</option></select></label>
+      <div class="export-actions" role="group" aria-label="Export book data"><button class="action" id="exportCsv" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg>CSV</button><button class="action" id="exportAll" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg>Export all data</button></div>
+      <div class="view-toggle" role="group" aria-label="View style"><button id="gridView" class="active" type="button" aria-label="Grid view" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button><button id="listView" type="button" aria-label="List view" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><circle cx="3" cy="18" r="1" fill="currentColor"/></svg></button></div>
+    </div></div></div></section>
+    <div class="shell filter-row" role="group" aria-label="Filter by language"><button class="chip active" type="button" data-filter="all" aria-pressed="true">All books</button><button class="chip" type="button" data-filter="English" aria-pressed="false">English</button><button class="chip" type="button" data-filter="中文" aria-pressed="false">中文</button><span class="results-meta" id="resultsMeta">Loading the library…</span></div>
+    <section class="shell books" id="books" aria-live="polite"></section><section class="shell empty" id="empty" hidden><h2>No matching books</h2><p>Try another search or filter.</p></section>
+    <aside class="shell notes" aria-label="About this library"><div><h2>Ready, get set, read!</h2><p>A library shared by our families. Tag the books your child has read, add your comments, and see what other parents thought too.</p></div></aside>
+  </main>
+
+  <dialog id="bookDialog" aria-labelledby="detailTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close details"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div id="detail"></div></dialog>
+  <dialog class="admin-dialog" id="uploadDialog" aria-labelledby="uploadTitle">
+    <div class="dlg-head"><h2 id="uploadTitle">Upload books by CSV</h2><button class="dialog-close" id="uploadClose" type="button" aria-label="Close upload">×</button></div>
+    <div class="dlg-body">
+      <p>New books are <strong>added only</strong> — a row whose HKPL Serial Number already exists is skipped, never overwritten. Check the preview before confirming.</p>
+      <label for="csvFile">CSV file</label>
+      <input id="csvFile" type="file" accept=".csv,text/csv">
+      <p><button class="action" id="downloadTemplate" type="button">Download CSV template</button></p>
+      <div id="uploadPreview"></div>
+      <p class="busy" id="uploadBusy" role="status"></p>
+      <p class="error" id="uploadError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="uploadCancel" type="button">Cancel</button>
+        <button class="action" id="previewBtn" type="button">Preview</button>
+        <button class="action primary" id="confirmBtn" type="button" disabled>Confirm import</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="reviewDialog" aria-labelledby="reviewTitle">
+    <div class="dlg-head"><h2 id="reviewTitle">Cover review</h2><button class="dialog-close" id="reviewClose" type="button" aria-label="Close review">×</button></div>
+    <div class="dlg-body">
+      <p>These books have no verified cover yet. Upload a cover image, or keep the honest no-cover placeholder.</p>
+      <div id="reviewList"></div>
+      <p class="error" id="reviewError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action primary" id="reviewDone" type="button">Done</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="unsavedDialog" aria-labelledby="unsavedTitle">
+    <div class="dlg-head"><h2 id="unsavedTitle">Save your changes?</h2><button class="dialog-close" id="unsavedClose" type="button" aria-label="Close this prompt">×</button></div>
+    <div class="dlg-body">
+      <p>You changed this book but have not saved. Save the changes, or discard them and go back to viewing?</p>
+      <div class="dlg-actions">
+        <button class="action" id="unsavedKeep" type="button">Keep editing</button>
+        <button class="action" id="unsavedDiscard" type="button">Discard changes</button>
+        <button class="action primary" id="unsavedSave" type="button">Save changes</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="deleteDialog" aria-labelledby="deleteTitle">
+    <div class="dlg-head"><h2 id="deleteTitle">Delete this book?</h2><button class="dialog-close" id="deleteClose" type="button" aria-label="Close this prompt">×</button></div>
+    <div class="dlg-body">
+      <p id="deleteText">This removes the book, its cover, and every child's tags and comments on it, for good. This cannot be undone.</p>
+      <p class="error" id="deleteError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="deleteKeep" type="button">Keep the book</button>
+        <button class="action danger" id="deleteConfirm" type="button">Delete this book</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="removeCoverDialog" aria-labelledby="removeCoverTitle">
+    <div class="dlg-head"><h2 id="removeCoverTitle">Remove this cover?</h2><button class="dialog-close" id="removeCoverClose" type="button" aria-label="Close this prompt">×</button></div>
+    <div class="dlg-body">
+      <p id="removeCoverText">Remove the cover? The book will show the placeholder image instead. You can add a cover again later.</p>
+      <div class="dlg-actions">
+        <button class="action" id="removeCoverKeep" type="button">Keep the cover</button>
+        <button class="action danger" id="removeCoverConfirm" type="button">Remove cover</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="clearDialog" aria-labelledby="clearTitle">
+    <div class="dlg-head"><h2 id="clearTitle">Clear the whole library?</h2><button class="dialog-close" id="clearClose" type="button" aria-label="Close this prompt">×</button></div>
+    <div class="dlg-body">
+      <p id="clearText">This deletes every book, its cover, every child's tags, comments and report marks. This cannot be undone.</p>
+      <p>Download a backup first — the CSV holds every book (without cover images), and importing it later restores the library.</p>
+      <p class="error" id="clearError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="clearCancel" type="button">Cancel</button>
+        <button class="action" id="clearExport" type="button">Export CSV backup</button>
+        <button class="action danger" id="clearDelete" type="button">Delete everything</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="clearConfirmDialog" aria-labelledby="clearConfirmTitle">
+    <div class="dlg-head"><h2 id="clearConfirmTitle">Delete everything for good?</h2><button class="dialog-close" id="clearConfirmClose" type="button" aria-label="Close this prompt">×</button></div>
+    <div class="dlg-body">
+      <p id="clearConfirmText">This is the last check. Every book, cover, tag, comment and report mark will be gone, and this cannot be undone.</p>
+      <p class="error" id="clearConfirmError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="clearConfirmKeep" type="button">Keep the library</button>
+        <button class="action danger" id="clearConfirmDelete" type="button">Delete everything</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog users-dialog" id="usersDialog" aria-labelledby="usersTitle">
+    <div class="dlg-head"><h2 id="usersTitle">Users</h2><button class="dialog-close" id="usersClose" type="button" aria-label="Close users">×</button></div>
+    <div class="dlg-body">
+      <p>One account per child. New accounts start as general users; promote trusted parents to moderator here.</p>
+      <div id="usersList"></div>
+      <h3>Add an account</h3>
+      <div class="user-form">
+        <label>Parent's email<input id="nuEmail" type="email" autocomplete="off"></label>
+        <label>Child's nickname<input id="nuNickname" type="text" autocomplete="off"></label>
+        <label>Child's age<input id="nuAge" type="number" min="0" max="18" autocomplete="off"></label>
+        <label>Starting password<input id="nuPassword" type="text" autocomplete="off"></label>
+      </div>
+      <p class="hint">Share the starting password privately with the parent and ask them to change it after first login.</p>
+      <p class="busy" id="usersBusy" role="status"></p>
+      <p class="error" id="usersError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="usersDone" type="button">Done</button>
+        <button class="action primary" id="addUserBtn" type="button">Add account</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="admin-dialog" id="accountDialog" aria-labelledby="accountTitle">
+    <div class="dlg-head"><h2 id="accountTitle">My account</h2><button class="dialog-close" id="accountClose" type="button" aria-label="Close my account">×</button></div>
+    <div class="dlg-body">
+      <p id="accountEmail"></p>
+      <label>Child's nickname<input id="accNickname" type="text"></label>
+      <label>Child's age<input id="accAge" type="number" min="0" max="18"></label>
+      <h3>Change password</h3>
+      <label>New password<input id="accPassword" type="password" autocomplete="new-password" minlength="6"></label>
+      <label>Repeat new password<input id="accPassword2" type="password" autocomplete="new-password" minlength="6"></label>
+      <p class="busy" id="accountBusy" role="status"></p>
+      <p class="error" id="accountError" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="action" id="accountCancel" type="button">Cancel</button>
+        <button class="action primary" id="accountSave" type="button">Save</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="adminbar adminbar-bottom" role="region" aria-label="Library administration">
+    <div class="adminbar-inner">
+      <span class="brand">Shared library</span>
+      <span class="pill" id="libraryCountB">0 books in the library</span>
+      <span class="pill" id="roleStateB" hidden></span>
+      <button class="adminbtn" id="usersBtnB" type="button" hidden>Users</button>
+      <button class="adminbtn" id="uploadCsvBtnB" type="button" hidden>Upload CSV</button>
+      <button class="adminbtn" id="addBookBtnB" type="button" hidden>Add book</button>
+      <button class="adminbtn" id="reviewCoversBtnB" type="button" hidden>Cover review <span id="reviewCountB"></span></button>
+      <button class="adminbtn" id="accountBtnB" type="button" hidden>My account</button>
+      <button class="adminbtn danger" id="clearBtnB" type="button" hidden>Clear library</button>
+      <button class="adminbtn" id="logoutBtnB" type="button" hidden>Log out</button>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+'use strict';
+/* ==========================================================================
+   Shared Library Books — single-file app (Supabase + GitHub Pages)
+   One shared catalogue for all families. One account per child.
+   Roles: admin (super user) / moderator / general user (parent).
+   Permissions are enforced by Row Level Security in the database; the app
+   also hides what a role cannot do, so the screen never offers a dead end.
+   ========================================================================== */
+
+// ---------- configuration (public by design; the secret key is never here) ----------
+const SUPABASE_URL = 'https://oonnuuuocmzhgsgwwxir.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_zABRxD9t7J7QOPrvebrTSA_pbfTOXM7';
+const SITE_URL = location.origin + location.pathname;
+const COVERS_BUCKET = 'covers';
+const OL_COVER = 'https://covers.openlibrary.org/b/isbn/';
+const GB_API = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
+const MAX_COVER_BYTES = 5 * 1024 * 1024;
+
+// ---------- clients ----------
+// window.supabase is the UMD global from the CDN script tag. Tests replace it
+// with a mock (window.supabase = { createClient: ... }) before this runs.
+function newClient(opts) {
+  return window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, opts);
+}
+const sb = newClient();
+let signupClient = null; // throwaway client: signing a parent up must not
+function getSignupClient() { // log the admin out of their own session.
+  if (!signupClient) signupClient = newClient({ auth: { persistSession: false, autoRefreshToken: false } });
+  return signupClient;
+}
+
+// ---------- small helpers ----------
+const $ = (id) => document.getElementById(id);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove('show'), 4200);
+}
+function downloadBlob(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return Number.isNaN(d) ? '—' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function fmtTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return Number.isNaN(d) ? '' : d.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+function readFileText(file) {
+  // FileReader rather than file.text(): works in every browser.
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ''));
+    reader.onerror = () => reject(new Error('Could not read the file.'));
+    reader.readAsText(file);
+  });
+}
+function normTitle(s) {
+  return String(s || '').toLowerCase().replace(/[\s\p{P}]/gu, '');
+}
+function normAuthor(s) {
+  return String(s || '').toLowerCase().replace(/[\s\p{P}]/gu, '');
+}
+function isbnDigits(s) { return String(s || '').replace(/[^0-9Xx]/g, '').toUpperCase(); }
+function isbnCheckOk(isbn) {
+  const d = isbnDigits(isbn);
+  if (d.length === 10) {
+    let sum = 0;
+    for (let i = 0; i < 9; i++) { if (!/\d/.test(d[i])) return false; sum += (10 - i) * Number(d[i]); }
+    const c = d[9] === 'X' ? 10 : Number(d[9]);
+    return Number.isNaN(c) ? false : (sum + c) % 11 === 0;
+  }
+  if (d.length === 13) {
+    let sum = 0;
+    for (let i = 0; i < 12; i++) { if (!/\d/.test(d[i])) return false; sum += Number(d[i]) * (i % 2 ? 3 : 1); }
+    return (10 - (sum % 10)) % 10 === Number(d[12]);
+  }
+  return false;
+}
+
+// ---------- state ----------
+let session = null;      // Supabase auth session
+let me = null;           // my profiles row
+let books = [];          // catalogue rows (mapped, see mapBook)
+let tags = new Map();    // bookId -> child_books row (my child; mods see all)
+let allTags = new Map(); // bookId -> [child_books rows] (admin/mod only view)
+let commentsByBook = new Map(); // bookId -> [comment rows with nickname]
+let profiles = new Map();       // userId -> profiles row
+let dupGroups = new Map();      // bookId -> [other bookIds in its duplicate group]
+let dupGroupCount = 0;
+let loading = false;
+
+const filters = { q: '', lang: 'all', report: 'all', sort: 'added', view: 'grid' };
+
+const isAdmin = () => !!(me && me.role === 'admin');
+const isMod = () => !!(me && (me.role === 'admin' || me.role === 'moderator'));
+const myId = () => (session && session.user ? session.user.id : null);
+const canEditBook = (b) => !!(me && (isMod() || b.added_by === myId()));
+const canDeleteBook = () => isMod();
+const coverUrl = (b) => {
+  if (!b || !b.cover_key || b.cover_status !== 'ok') return null;
+  return sb.storage.from(COVERS_BUCKET).getPublicUrl(b.cover_key).data.publicUrl;
+};
+
+function mapBook(row) {
+  const titleEn = (row.title_en || '').trim();
+  const titleZh = (row.title_zh || '').trim();
+  const langs = [];
+  if (titleEn) langs.push('en');
+  if (titleZh) langs.push('zh');
+  return {
+    id: row.id, raw: row,
+    title: titleEn || titleZh, altTitle: titleEn && titleZh ? titleZh : '',
+    author: row.author || '', isbn: row.isbn || '',
+    serial: row.hkpl_serial_number || '',
+    language: langs.includes('zh') && !langs.includes('en') ? '中文' : 'English',
+    langs, addedOn: row.created_at, addedBy: row.added_by,
+    cover_key: row.cover_key, cover_status: row.cover_status || 'needs_review',
+    storyEn: row.story_en || '', storyZh: row.story_zh || '',
+    dupOthers: [],
+  };
+}
+function nicknameOf(userId) {
+  if (userId === myId()) return me ? (me.child_nickname || 'My child') : 'My child';
+  const p = profiles.get(userId);
+  return p ? (p.child_nickname || 'A child') : 'A child';
+}
+
+// ---------- CSV (RFC 4180) ----------
+function parseCsv(text) {
+  const rows = [];
+  let row = [], cur = '', inQuotes = false;
+  const s = String(text).replace(/^\uFEFF/, '');
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (s[i + 1] === '"') { cur += '"'; i++; } else inQuotes = false;
+      } else cur += c;
+    } else if (c === '"') inQuotes = true;
+    else if (c === ',') { row.push(cur); cur = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && s[i + 1] === '\n') i++;
+      row.push(cur); cur = '';
+      if (row.length > 1 || row[0] !== '') rows.push(row);
+      row = [];
+    } else cur += c;
+  }
+  if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+  return rows;
+}
+const CSV_COLUMNS = ['title_en', 'title_zh', 'author', 'illustrator', 'translator', 'publisher', 'isbn', 'hkpl_serial_number', 'story_en', 'story_zh', 'notes'];
+function validateBookRow(r) {
+  const errors = [], warnings = [];
+  if (!((r.title_en || '').trim() || (r.title_zh || '').trim())) errors.push('missing title (title_en or title_zh required)');
+  const serial = (r.hkpl_serial_number || '').trim();
+  if (serial && !/^\d{6,20}$/.test(serial)) errors.push('HKPL Serial Number must be 6–20 digits');
+  const isbn = isbnDigits(r.isbn || '');
+  if (isbn && !(isbn.length === 10 || isbn.length === 13)) errors.push('ISBN must be 10 or 13 digits');
+  else if (isbn && !isbnCheckOk(isbn)) warnings.push('ISBN check digit does not match');
+  for (const f of ['story_en', 'comment_en']) {
+    const w = (r[f] || '').trim().split(/\s+/).filter(Boolean).length;
+    if (w > 100) warnings.push(f + ' is over 100 words');
+  }
+  for (const f of ['story_zh', 'comment_tc']) {
+    if ((r[f] || '').length > 100) warnings.push(f + ' is over 100 characters');
+  }
+  return { errors, warnings };
+}
+function csvCell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+
+// ---------- auth ----------
+async function loadMyProfile() {
+  const { data, error } = await sb.from('profiles').select('*').eq('id', myId()).maybeSingle();
+  if (error) throw new Error(error.message || 'Could not load your account.');
+  return data;
+}
+async function enterApp() {
+  try {
+    me = await loadMyProfile();
+  } catch (e) {
+    showLogin('Could not load your account. ' + e.message);
+    return;
+  }
+  if (!me || !me.active) {
+    await sb.auth.signOut();
+    showLogin('This account is disabled. Ask the library admin to re-enable it.');
+    return;
+  }
+  document.body.classList.remove('gated');
+  $('roleState').hidden = false;
+  $('roleState').textContent = me.role === 'admin' ? 'Admin' : me.role === 'moderator' ? 'Moderator' : 'Parent';
+  setAdminUI();
+  await loadAll();
+}
+function showLogin(msg) {
+  document.body.classList.add('gated');
+  $('loginForm').hidden = false;
+  $('resetForm').hidden = true;
+  $('forgotSent').hidden = true;
+  if (msg) $('loginError').textContent = msg;
+}
+function setAdminUI() {
+  const admin = isAdmin(), mod = isMod();
+  for (const id of ['usersBtn', 'usersBtnB']) $(id).hidden = !admin;
+  for (const id of ['uploadCsvBtn', 'uploadCsvBtnB', 'clearBtn', 'clearBtnB', 'exportAll']) $(id).hidden = !admin;
+  for (const id of ['reviewCoversBtn', 'reviewCoversBtnB']) $(id).hidden = false; // every parent can help with covers
+  for (const id of ['addBookBtn', 'addBookBtnB', 'accountBtn', 'accountBtnB', 'logoutBtn', 'logoutBtnB']) $(id).hidden = false;
+  void mod;
+}
+async function doLogin(email, password) {
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) throw new Error(error.message || 'Login failed.');
+  session = data.session;
+  await enterApp();
+}
+async function doLogout() {
+  await sb.auth.signOut();
+  session = null; me = null;
+  books = []; tags = new Map(); allTags = new Map(); commentsByBook = new Map(); profiles = new Map();
+  closeAllDialogs();
+  $('loginEmail').value = '';
+  $('loginPassword').value = '';
+  $('loginError').textContent = '';
+  showLogin();
+}
+function closeAllDialogs() {
+  for (const d of $$('dialog')) if (d.open) d.close();
+}
+
+// ---------- data loading ----------
+function computeDuplicates() {
+  dupGroups = new Map();
+  const byIsbn = new Map(), byTitle = new Map();
+  const parent = new Map();
+  const find = (x) => { while (parent.get(x) !== x) { parent.set(x, parent.get(parent.get(x))); x = parent.get(x); } return x; };
+  const union = (a, b) => { const ra = find(a), rb = find(b); if (ra !== rb) parent.set(ra, rb); };
+  for (const b of books) parent.set(b.id, b.id);
+  for (const b of books) {
+    const isbn = isbnDigits(b.isbn);
+    if (isbn) {
+      if (byIsbn.has(isbn)) union(b.id, byIsbn.get(isbn));
+      else byIsbn.set(isbn, b.id);
+    }
+    const t = normTitle(b.title) || normTitle(b.altTitle);
+    if (t) {
+      const key = t + '|' + normAuthor(b.author);
+      if (byTitle.has(key)) union(b.id, byTitle.get(key));
+      else byTitle.set(key, b.id);
+      // Same title, authors agreeing or either blank, also groups.
+      for (const [k2, id2] of byTitle) {
+        if (id2 !== b.id && k2.split('|')[0] === t) {
+          const a1 = normAuthor(b.author), a2 = normAuthor(books.find((x) => x.id === id2).author);
+          if (!a1 || !a2 || a1 === a2) union(b.id, id2);
+        }
+      }
+    }
+  }
+  const groups = new Map();
+  for (const b of books) {
+    const r = find(b.id);
+    if (!groups.has(r)) groups.set(r, []);
+    groups.get(r).push(b.id);
+  }
+  dupGroupCount = 0;
+  for (const ids of groups.values()) {
+    if (ids.length < 2) continue;
+    dupGroupCount++;
+    for (const id of ids) dupGroups.set(id, ids.filter((x) => x !== id));
+  }
+  for (const b of books) {
+    b.dupOthers = (dupGroups.get(b.id) || []).map((id) => {
+      const o = books.find((x) => x.id === id);
+      return o ? { id: o.id, title: o.title, serial: o.serial } : null;
+    }).filter(Boolean);
+  }
+}
+async function loadAll() {
+  loading = true;
+  const [profRes, bookRes, tagRes, comRes] = await Promise.all([
+    sb.from('profiles').select('*').eq('active', true).order('created_at'),
+    sb.from('books').select('*').order('created_at', { ascending: false }),
+    sb.from('child_books').select('*'),
+    sb.from('comments').select('*').order('updated_at', { ascending: false }),
+  ]);
+  for (const [name, res] of [['profiles', profRes], ['books', bookRes], ['tags', tagRes], ['comments', comRes]]) {
+    if (res.error) { loading = false; showToast('Could not load the library (' + name + '). ' + res.error.message); return; }
+  }
+  profiles = new Map(profRes.data.map((p) => [p.id, p]));
+  books = bookRes.data.map(mapBook);
+  tags = new Map();
+  allTags = new Map();
+  for (const t of tagRes.data) {
+    if (t.child_id === myId()) tags.set(t.book_id, t);
+    if (!allTags.has(t.book_id)) allTags.set(t.book_id, []);
+    allTags.get(t.book_id).push(t);
+  }
+  commentsByBook = new Map();
+  for (const c of comRes.data) {
+    if (!commentsByBook.has(c.book_id)) commentsByBook.set(c.book_id, []);
+    commentsByBook.get(c.book_id).push(c);
+  }
+  computeDuplicates();
+  loading = false;
+  updateLibraryCount();
+  refreshReviewCount();
+  render();
+}
+function updateLibraryCount() {
+  const label = books.length + (books.length === 1 ? ' book in the library' : ' books in the library');
+  $('libraryCount').textContent = label;
+  $('libraryCountB').textContent = label;
+}
+function refreshReviewCount() {
+  const n = books.filter((b) => b.cover_status !== 'ok').length;
+  for (const id of ['reviewCount', 'reviewCountB']) $(id).textContent = n ? '(' + n + ')' : '';
+  return n;
+}
+
+// ---------- shelf rendering ----------
+function bookMatches(b) {
+  const q = filters.q.trim().toLowerCase();
+  if (q) {
+    const hay = [b.title, b.altTitle, b.author, b.isbn, b.serial].join(' ').toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  if (filters.lang !== 'all' && !b.langs.includes(filters.lang === 'English' ? 'en' : 'zh')) return false;
+  const tag = tags.get(b.id);
+  if (filters.report === 'mine' && !tag) return false;
+  if (filters.report === 'done' && !(tag && tag.report_submitted)) return false;
+  if (filters.report === 'notdone' && !(tag && !tag.report_submitted)) return false;
+  return true;
+}
+function sortedBooks(list) {
+  const arr = list.slice();
+  if (filters.sort === 'title') arr.sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
+  else if (filters.sort === 'author') arr.sort((a, b) => a.author.localeCompare(b.author, undefined, { sensitivity: 'base' }));
+  else arr.sort((a, b) => String(b.addedOn).localeCompare(String(a.addedOn)));
+  return arr;
+}
+function coverHtml(b, overrideUrl) {
+  const url = overrideUrl || coverUrl(b);
+  const dup = b.dupOthers.length
+    ? '<span class="dup-tag">Possible duplicate</span>' : '';
+  if (url) {
+    return '<div class="cover-frame">' + dup
+      + '<img src="' + escapeHtml(url) + '" alt="Cover of ' + escapeHtml(b.title) + '" loading="lazy"></div>';
+  }
+  return '<div class="cover-frame"><div class="cover-placeholder-mark" aria-label="No cover yet">' + dup
+    + '<span>No cover<br>yet</span></div></div>';
+}
+function render() {
+  const list = sortedBooks(books.filter(bookMatches));
+  const shelf = $('books');
+  shelf.classList.toggle('list', filters.view === 'list');
+  shelf.innerHTML = list.map((b) => {
+    const tag = tags.get(b.id);
+    const marks = [];
+    if (tag) marks.push('<span class="tag read">✓ Read</span>');
+    if (tag && tag.report_submitted) marks.push('<span class="tag report">✓ Report done</span>');
+    return '<article class="book"><button class="cover-button" type="button" data-book="' + b.id + '" aria-label="Open ' + escapeHtml(b.title) + '">'
+      + coverHtml(b)
+      + '<span class="book-meta"><span class="book-title">' + escapeHtml(b.title) + '</span>'
+      + (b.altTitle ? '<span class="book-alt">' + escapeHtml(b.altTitle) + '</span>' : '')
+      + '<span class="book-author">' + escapeHtml(b.author || 'Unknown author') + '</span>'
+      + (marks.length ? '<span class="book-marks">' + marks.join(' ') + '</span>' : '')
+      + '</span></button></article>';
+  }).join('');
+  $('empty').hidden = list.length > 0;
+  $('resultsMeta').textContent = list.length === books.length
+    ? 'Showing all ' + books.length + ' books'
+    : 'Showing ' + list.length + ' of ' + books.length + ' books';
+  updateDashboard();
+}
+function updateDashboard() {
+  const mine = Array.from(tags.values());
+  const mineDone = mine.filter((t) => t.report_submitted).length;
+  const now = new Date();
+  const addedMonth = books.filter((b) => {
+    const d = new Date(b.addedOn);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  }).length;
+  const set = (id, v) => { const el = $(id); if (el) el.textContent = String(v); };
+  set('statTotal', books.length);
+  set('statFamilies', profiles.size);
+  set('statMine', mine.length);
+  set('statReports', mineDone);
+  set('statMineNoReport', mine.length - mineDone);
+  set('statReview', books.filter((b) => b.cover_status === 'needs_review').length);
+  set('statPlaceholder', books.filter((b) => b.cover_status === 'placeholder').length);
+  set('statDupes', dupGroupCount);
+  set('statAddedMonth', addedMonth);
+}
+
+// ---------- detail dialog ----------
+const dialog = $('bookDialog');
+let currentBook = null;
+let detailMode = 'view'; // 'view' | 'edit'
+let addingBook = false;
+let editSnapshot = null;
+let stagedCover = null; // {kind:'file',file,preview} | {kind:'link',url,preview} | {kind:'remove'}
+let stagedObjectUrl = null;
+let pendingLeaveAction = null;
+let deleteTarget = null;
+let removeCoverBook = null;
+
+const EDIT_FIELDS = ['title_en', 'title_zh', 'author', 'illustrator', 'translator', 'publisher', 'isbn', 'hkpl_serial_number', 'story_en', 'story_zh', 'notes'];
+function editFieldValuesFromRow(row) {
+  const v = {};
+  for (const f of EDIT_FIELDS) v[f] = (row[f] || '').trim();
+  return v;
+}
+function collectEditValues() {
+  const v = {};
+  for (const f of EDIT_FIELDS) {
+    const el = document.getElementById('ef' + f.replace(/(^|_)([a-z])/g, (m, p, c) => c.toUpperCase()));
+    v[f] = el ? el.value.trim() : '';
+  }
+  return v;
+}
+function editFormDirty() {
+  if (detailMode !== 'edit' || !editSnapshot) return false;
+  if (stagedCover) return true;
+  const cur = collectEditValues();
+  return EDIT_FIELDS.some((f) => cur[f] !== editSnapshot[f]);
+}
+function clearStagedCover() {
+  if (stagedObjectUrl) { URL.revokeObjectURL(stagedObjectUrl); stagedObjectUrl = null; }
+  stagedCover = null;
+}
+function modeToggleMarkup(editing) {
+  if (addingBook) return '';
+  return '<div class="mode-toggle" role="group" aria-label="View or edit this book">'
+    + '<button type="button" data-detail-mode="view" class="' + (editing ? '' : 'active') + '">View</button>'
+    + '<button type="button" data-detail-mode="edit" class="' + (editing ? 'active' : '') + '">Edit</button></div>';
+}
+function metaRow(label, value) {
+  return '<div><dt>' + escapeHtml(label) + '</dt><dd>' + escapeHtml(value || '—') + '</dd></div>';
+}
+function metaRowEdit(label, id, type, value) {
+  return '<div><dt><label for="' + id + '">' + escapeHtml(label) + '</label></dt><dd>'
+    + '<input id="' + id + '" type="' + type + '" value="' + escapeHtml(value || '') + '"></dd></div>';
+}
+function detailVisualHtml(b, editing) {
+  let html = coverHtml(b, stagedCover && stagedCover.preview ? stagedCover.preview : null);
+  if (editing) {
+    html += '<div class="cover-stage">'
+      + '<label class="cover-stage-label" for="coverFile">Cover image</label>'
+      + '<input id="coverFile" type="file" accept="image/jpeg,image/png,image/webp">'
+      + '<div class="cover-stage-row"><input id="coverUrl" type="url" placeholder="Or paste an image link">'
+      + '<button class="action" id="stageCoverLink" type="button">Use link</button></div>'
+      + ((b.cover_key || stagedCover) ? '<button class="action" id="removeCover" type="button">Remove cover</button>' : '')
+      + '<p class="cover-stage-status" id="uploadStatus" role="status"></p></div>';
+  }
+  return '<div class="detail-visual">' + html + '</div>';
+}
+function reportSwitchMarkup(b) {
+  const tag = tags.get(b.id);
+  const done = !!(tag && tag.report_submitted);
+  const time = tag && tag.report_updated_at ? fmtTime(tag.report_updated_at) : '';
+  return '<div class="report-panel"><h3>Report for ' + escapeHtml(me.child_nickname || 'my child') + '</h3>'
+    + '<div class="report-switches"><button class="report-switch" type="button" role="switch" aria-checked="' + done + '" data-report-book="' + b.id + '">'
+    + '<span class="report-state">' + (done ? 'Report submitted' : 'Report not submitted') + '</span>'
+    + (time ? '<span class="report-time">Last update: ' + escapeHtml(time) + '</span>' : '')
+    + '</button></div></div>';
+}
+function commentsHtml(b) {
+  const list = commentsByBook.get(b.id) || [];
+  let html = '<section class="research"><h3>What other parents thought</h3>';
+  if (!list.length) {
+    html += '<p>No parent comments yet — yours could be the first.</p>';
+  } else {
+    html += '<div class="comments-list">';
+    for (const c of list) {
+      const mine = c.child_id === myId();
+      const canRemove = mine || isMod();
+      html += '<article class="comment-card' + (mine ? ' mine' : '') + '">'
+        + '<div class="comment-who">' + escapeHtml(nicknameOf(c.child_id)) + (mine ? ' <span class="you">(you)</span>' : '') + '</div>'
+        + (c.comment_en ? '<p lang="en">' + escapeHtml(c.comment_en) + '</p>' : '')
+        + (c.comment_tc ? '<p lang="zh-Hant">' + escapeHtml(c.comment_tc) + '</p>' : '')
+        + (canRemove ? '<div class="comment-actions">'
+          + (mine ? '<button type="button" data-edit-comment="' + c.id + '">Edit my comment</button>' : '')
+          + '<button type="button" class="danger" data-delete-comment="' + c.id + '">' + (mine ? 'Delete my comment' : 'Remove') + '</button>'
+          + '</div>' : '')
+        + '</article>';
+    }
+    html += '</div>';
+  }
+  const mine = list.find((c) => c.child_id === myId());
+  html += '<div class="comment-edit" id="myCommentEdit">'
+    + '<h3>' + (mine ? 'Edit my comment' : 'Add my comment') + '</h3>'
+    + '<p class="hint">Other parents will see this when they open the book. English and Traditional Chinese, up to 100 words / 100 characters each.</p>'
+    + '<label for="myCommentEn">English</label><textarea id="myCommentEn" lang="en">' + escapeHtml(mine ? mine.comment_en : '') + '</textarea>'
+    + '<label for="myCommentTc">Traditional Chinese</label><textarea id="myCommentTc" lang="zh-Hant">' + escapeHtml(mine ? mine.comment_tc : '') + '</textarea>'
+    + '<div class="comment-actions"><button class="action primary" type="button" id="saveMyComment">Save my comment</button></div>'
+    + '<p class="error" id="myCommentError" role="alert"></p></div>';
+  html += '</section>';
+  return html;
+}
+function detailBodyHtml(b, values, editing) {
+  const v = values || editFieldValuesFromRow(b.raw);
+  let html = '<div class="detail-body">' + modeToggleMarkup(editing);
+  if (addingBook) html += '<p class="edit-hint">Adding a new book — a title (English or Chinese) is required. The HKPL Serial Number is optional: leave it blank and one is assigned. The story can be pasted in from any AI.</p>';
+  else if (editing) html += '<p class="edit-hint">Editing — changes are not saved until you save them.</p>';
+  if (!addingBook) html += '<span class="detail-kicker">' + escapeHtml(b.language) + ' book</span>';
+  if (editing) {
+    html += '<h2><input id="efTitleEn" value="' + escapeHtml(v.title_en) + '" placeholder="English title" aria-label="English title"></h2>'
+      + '<p class="detail-author"><input id="efTitleZh" value="' + escapeHtml(v.title_zh) + '" placeholder="Chinese title" aria-label="Chinese title"></p>'
+      + '<dl class="detail-meta">'
+      + '<div><dt><label for="efAuthor">Author</label></dt><dd><input id="efAuthor" value="' + escapeHtml(v.author) + '"></dd></div>'
+      + metaRowEdit('HKPL Serial Number' + (addingBook ? ' (optional)' : ''), 'efHkplSerialNumber', 'text', b.serial)
+      + metaRowEdit('ISBN-13', 'efIsbn', 'text', b.isbn)
+      + '<div><dt>Added</dt><dd>' + escapeHtml(addingBook ? 'Today' : fmtDate(b.addedOn)) + '</dd></div>'
+      + '<div><dt>Added by</dt><dd>' + escapeHtml(addingBook ? nicknameOf(myId()) : nicknameOf(b.addedBy)) + '</dd></div>'
+      + metaRowEdit('Illustrator', 'efIllustrator', 'text', v.illustrator)
+      + metaRowEdit('Translator', 'efTranslator', 'text', v.translator)
+      + metaRowEdit('Publisher', 'efPublisher', 'text', v.publisher)
+      + metaRowEdit('Notes', 'efNotes', 'text', v.notes)
+      + '</dl>'
+      + '<section class="research"><h3>Story reminder</h3>'
+      + '<label for="efStoryEn">English</label><textarea id="efStoryEn">' + escapeHtml(v.story_en) + '</textarea>'
+      + '<label for="efStoryZh">Traditional Chinese</label><textarea id="efStoryZh">' + escapeHtml(v.story_zh) + '</textarea></section>'
+      + '<p class="edit-status" id="editStatus" aria-live="polite"></p>'
+      + '<p class="edit-error" id="editError" role="alert"></p>'
+      + '<div class="detail-actions">' + (addingBook ? '' : '<button class="action danger" id="deleteBook" type="button">Delete book</button>')
+      + '<button class="action" id="cancelEdits" type="button">Cancel</button>'
+      + '<button class="action primary" id="saveEdits" type="button">' + (addingBook ? 'Add book' : 'Save changes') + '</button></div>';
+  } else {
+    const tag = tags.get(b.id);
+    html += '<h2>' + escapeHtml(b.title) + '</h2>'
+      + (b.altTitle ? '<p class="detail-alt">' + escapeHtml(b.altTitle) + '</p>' : '')
+      + '<p class="detail-author">' + escapeHtml(b.author || 'Unknown author') + '</p>'
+      + '<dl class="detail-meta">'
+      + metaRow('HKPL Serial Number', b.serial)
+      + metaRow('ISBN-13', b.isbn)
+      + metaRow('Added', fmtDate(b.addedOn))
+      + metaRow('Added by', nicknameOf(b.addedBy))
+      + metaRow('Illustrator', b.raw.illustrator)
+      + metaRow('Translator', b.raw.translator)
+      + metaRow('Publisher', b.raw.publisher)
+      + metaRow('Notes', b.raw.notes)
+      + '</dl>'
+      + (b.dupOthers.length ? '<p class="dup-note">Possible duplicate of ' + b.dupOthers.map((o) => '“' + escapeHtml(o.title) + '” (HKPL Serial Number ' + escapeHtml(o.serial) + ')').join('; ') + '.</p>' : '')
+      + '<div class="tag-row"><button class="action' + (tag ? ' primary' : '') + '" type="button" id="tagToggle">'
+      + (tag ? '✓ Read by my child — remove tag' : 'Mark as read by my child') + '</button>'
+      + (tag ? '<span class="tag-state">On my child’s shelf</span>' : '') + '</div>'
+      + (tag ? reportSwitchMarkup(b) : '')
+      + '<section class="research"><h3>Story reminder</h3>'
+      + (b.storyEn ? '<p lang="en">' + escapeHtml(b.storyEn) + '</p>' : '')
+      + (b.storyZh ? '<p lang="zh-Hant">' + escapeHtml(b.storyZh) + '</p>' : '')
+      + (!b.storyEn && !b.storyZh ? '<p>No story reminder yet.</p>' : '')
+      + '</section>'
+      + commentsHtml(b);
+  }
+  html += '</div>';
+  return html;
+}
+function renderDetail(b) {
+  const editing = detailMode === 'edit';
+  $('detail').innerHTML = '<div class="detail">' + detailVisualHtml(b, editing)
+    + detailBodyHtml(b, editing ? editFieldValuesFromRow(b.raw) : null, editing) + '</div>';
+  dialog.classList.toggle('editing', editing);
+  wireDetail(b);
+}
+function openBook(book, mode) {
+  currentBook = book;
+  if (mode) detailMode = mode;
+  else if (!dialog.open || !currentBook || currentBook.id !== book.id) detailMode = 'view';
+  if (detailMode === 'edit') {
+    clearStagedCover();
+    editSnapshot = editFieldValuesFromRow(book.raw);
+  }
+  renderDetail(book);
+  if (!dialog.open) dialog.showModal();
+}
+function blankBook() {
+  const raw = { title_en: '', title_zh: '', author: '', illustrator: '', translator: '', publisher: '', isbn: '', hkpl_serial_number: '', story_en: '', story_zh: '', notes: '' };
+  return { id: null, raw, title: '', altTitle: '', author: '', isbn: '', serial: '', language: 'English', langs: ['en'], addedOn: new Date().toISOString(), addedBy: myId(), cover_key: null, cover_status: 'needs_review', storyEn: '', storyZh: '', dupOthers: [] };
+}
+function openAddBook() {
+  addingBook = true;
+  openBook(blankBook(), 'edit');
+}
+function assignSerialNumber() {
+  // A blank HKPL Serial Number gets a 17-digit number starting with 9 (a
+  // prefix no HKPL receipt barcode uses), checked against the shelf first.
+  // The database unique index is the backstop if two parents add at once.
+  for (let i = 0; i < 10; i++) {
+    const candidate = '9' + String(Date.now()) + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+    if (!books.some((b) => b.serial === candidate)) return candidate;
+  }
+  return '9' + String(Date.now()) + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+}
+async function saveDetailEdits(book) {
+  const updates = collectEditValues();
+  const statusEl = $('editStatus');
+  const errorEl = $('editError');
+  const saveBtn = $('saveEdits');
+  const check = validateBookRow(updates);
+  if (check.errors.length) { if (errorEl) errorEl.textContent = check.errors[0]; return false; }
+  if (errorEl) errorEl.textContent = '';
+  if (statusEl) statusEl.textContent = 'Saving…';
+  if (saveBtn) saveBtn.disabled = true;
+  let generatedSerial = '';
+  if (addingBook && !updates.hkpl_serial_number) {
+    generatedSerial = assignSerialNumber();
+    updates.hkpl_serial_number = generatedSerial;
+  }
+  try {
+    let saved;
+    if (addingBook) {
+      const { data, error } = await sb.from('books').insert({
+        title_en: updates.title_en, title_zh: updates.title_zh,
+        author: updates.author, illustrator: updates.illustrator,
+        translator: updates.translator, publisher: updates.publisher,
+        isbn: updates.isbn, hkpl_serial_number: updates.hkpl_serial_number,
+        story_en: updates.story_en, story_zh: updates.story_zh,
+        notes: updates.notes, added_by: myId(), cover_status: 'needs_review',
+      }).select().single();
+      if (error) throw new Error(error.message);
+      saved = data;
+    } else {
+      const { data, error } = await sb.from('books').update({
+        title_en: updates.title_en, title_zh: updates.title_zh,
+        author: updates.author, illustrator: updates.illustrator,
+        translator: updates.translator, publisher: updates.publisher,
+        isbn: updates.isbn, hkpl_serial_number: updates.hkpl_serial_number,
+        story_en: updates.story_en, story_zh: updates.story_zh, notes: updates.notes,
+      }).eq('id', book.id).select().single();
+      if (error) throw new Error(error.message);
+      saved = data;
+    }
+    let coverError = null;
+    if (stagedCover) {
+      try {
+        if (stagedCover.kind === 'file') await uploadCoverFile(saved.id, stagedCover.file, saved);
+        else if (stagedCover.kind === 'link') await fetchCoverFromLink(saved, stagedCover.url);
+        else if (stagedCover.kind === 'remove') await removeCover(saved);
+      } catch (e) { coverError = e.message || 'Could not save the cover.'; }
+    }
+    clearStagedCover();
+    await loadAll();
+    const fresh = books.find((x) => x.id === saved.id);
+    const wasAdding = addingBook;
+    addingBook = false;
+    if (fresh) openBook(fresh, 'view');
+    showToast((wasAdding ? 'Book added to the library.' : 'Book saved.')
+      + (generatedSerial ? ' HKPL Serial Number ' + generatedSerial + ' was assigned.' : '')
+      + (check.warnings.length ? ' Note: ' + check.warnings.join(' ') : '')
+      + (coverError ? ' Cover could not be saved: ' + coverError : ''));
+    return true;
+  } catch (err) {
+    if (statusEl) statusEl.textContent = '';
+    if (errorEl) errorEl.textContent = err.message || 'Could not save.';
+    if (saveBtn) saveBtn.disabled = false;
+    return false;
+  }
+}
+function requestLeaveEdit(action) {
+  pendingLeaveAction = action;
+  if (!editFormDirty()) { leaveEdit(action); return; }
+  $('unsavedDialog').showModal();
+}
+function leaveEdit(action) {
+  if (action === 'close' || addingBook) { dialog.close(); return; }
+  if (currentBook) openBook(currentBook, 'view');
+}
+function refreshVisualColumn(b) {
+  const vis = dialog.querySelector('.detail-visual');
+  if (vis) vis.outerHTML = detailVisualHtml(b, detailMode === 'edit');
+  wireDetailVisual(b);
+}
+function wireDetailVisual(b) {
+  const fileInput = $('coverFile');
+  if (fileInput) fileInput.addEventListener('change', () => {
+    const f = fileInput.files[0];
+    if (!f) return;
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { $('uploadStatus').textContent = 'Use a JPEG, PNG or WebP image.'; return; }
+    if (f.size > MAX_COVER_BYTES) { $('uploadStatus').textContent = 'That image is over 5 MB.'; return; }
+    clearStagedCover();
+    stagedObjectUrl = URL.createObjectURL(f);
+    stagedCover = { kind: 'file', file: f, preview: stagedObjectUrl };
+    $('uploadStatus').textContent = 'Cover staged — it is saved when you save the book.';
+    refreshVisualColumn(b);
+  });
+  const linkBtn = $('stageCoverLink');
+  if (linkBtn) linkBtn.addEventListener('click', () => {
+    const url = ($('coverUrl').value || '').trim();
+    if (!url) { $('uploadStatus').textContent = 'Paste an image link first.'; return; }
+    clearStagedCover();
+    stagedCover = { kind: 'link', url, preview: url };
+    $('uploadStatus').textContent = 'Cover link staged — it is fetched when you save the book.';
+    refreshVisualColumn(b);
+  });
+  const removeBtn = $('removeCover');
+  if (removeBtn) removeBtn.addEventListener('click', () => {
+    removeCoverBook = b;
+    $('removeCoverDialog').showModal();
+  });
+}
+function wireDetail(b) {
+  wireDetailVisual(b);
+  $$('[data-detail-mode]').forEach((btn) => btn.addEventListener('click', () => {
+    if (btn.dataset.detailMode === 'edit') {
+      if (!canEditBook(b)) { showToast('Only the parent who added this book (or a moderator) can edit it.'); return; }
+      openBook(b, 'edit');
+    } else requestLeaveEdit('view');
+  }));
+  const tagBtn = $('tagToggle');
+  if (tagBtn) tagBtn.addEventListener('click', () => toggleTag(b));
+  const repBtn = dialog.querySelector('[data-report-book]');
+  if (repBtn) repBtn.addEventListener('click', () => toggleReport(b));
+  const saveComment = $('saveMyComment');
+  if (saveComment) saveComment.addEventListener('click', () => saveMyComment(b));
+  $$('[data-edit-comment]').forEach((btn) => btn.addEventListener('click', () => {
+    const ta = $('myCommentEn');
+    if (ta) ta.focus();
+    document.getElementById('myCommentEdit').scrollIntoView({ block: 'nearest' });
+  }));
+  $$('[data-delete-comment]').forEach((btn) => btn.addEventListener('click', () => deleteComment(b, btn.dataset.deleteComment)));
+  const saveBtn = $('saveEdits');
+  if (saveBtn) saveBtn.addEventListener('click', () => saveDetailEdits(b));
+  const cancelBtn = $('cancelEdits');
+  if (cancelBtn) cancelBtn.addEventListener('click', () => requestLeaveEdit('view'));
+  const delBtn = $('deleteBook');
+  if (delBtn) delBtn.addEventListener('click', () => {
+    deleteTarget = b;
+    $('deleteDialog').showModal();
+  });
+}
+async function toggleTag(b) {
+  const has = tags.has(b.id);
+  if (has) {
+    const { error } = await sb.from('child_books').delete().eq('child_id', myId()).eq('book_id', b.id);
+    if (error) { showToast('Could not remove the tag. ' + error.message); return; }
+  } else {
+    const { error } = await sb.from('child_books').insert({ child_id: myId(), book_id: b.id });
+    if (error) { showToast('Could not tag this book. ' + error.message); return; }
+  }
+  await loadAll();
+  const fresh = books.find((x) => x.id === b.id);
+  if (fresh) openBook(fresh, 'view');
+}
+async function ensureTag(b) {
+  if (tags.has(b.id)) return;
+  const { error } = await sb.from('child_books').insert({ child_id: myId(), book_id: b.id });
+  if (error) throw new Error(error.message);
+}
+async function toggleReport(b) {
+  try {
+    await ensureTag(b);
+    const tag = tags.get(b.id);
+    const next = !(tag && tag.report_submitted);
+    const { error } = await sb.from('child_books')
+      .update({ report_submitted: next, report_updated_at: new Date().toISOString() })
+      .eq('child_id', myId()).eq('book_id', b.id);
+    if (error) throw new Error(error.message);
+    await loadAll();
+    const fresh = books.find((x) => x.id === b.id);
+    if (fresh) openBook(fresh, 'view');
+  } catch (e) {
+    showToast('Could not change the report mark. ' + e.message);
+  }
+}
+async function saveMyComment(b) {
+  const en = ($('myCommentEn').value || '').trim();
+  const tc = ($('myCommentTc').value || '').trim();
+  const errEl = $('myCommentError');
+  if (en.split(/\s+/).filter(Boolean).length > 100) { errEl.textContent = 'The English comment is over 100 words.'; return; }
+  if (tc.length > 100) { errEl.textContent = 'The Chinese comment is over 100 characters.'; return; }
+  errEl.textContent = '';
+  try {
+    await ensureTag(b);
+    const { error } = await sb.from('comments').upsert(
+      { child_id: myId(), book_id: b.id, comment_en: en, comment_tc: tc },
+      { onConflict: 'child_id,book_id' });
+    if (error) throw new Error(error.message);
+    await loadAll();
+    const fresh = books.find((x) => x.id === b.id);
+    if (fresh) openBook(fresh, 'view');
+    showToast('Comment saved.');
+  } catch (e) {
+    errEl.textContent = e.message || 'Could not save the comment.';
+  }
+}
+async function deleteComment(b, commentId) {
+  const { error } = await sb.from('comments').delete().eq('id', commentId);
+  if (error) { showToast('Could not delete the comment. ' + error.message); return; }
+  await loadAll();
+  const fresh = books.find((x) => x.id === b.id);
+  if (fresh) openBook(fresh, 'view');
+  showToast('Comment removed.');
+}
+
+// ---------- covers ----------
+function coverObjectKey(bookId) { return bookId + '.jpg'; }
+async function setBookCover(bookId, key, status) {
+  const { error } = await sb.from('books').update({ cover_key: key, cover_status: status }).eq('id', bookId);
+  if (error) throw new Error(error.message);
+}
+async function uploadCoverFile(bookId, file, bookRow) {
+  const path = coverObjectKey(bookId);
+  const upsert = isMod() || (bookRow && bookRow.added_by === myId() && !bookRow.cover_key);
+  const { error } = await sb.storage.from(COVERS_BUCKET).upload(path, file, { upsert, contentType: file.type });
+  if (error) throw new Error(error.message);
+  await setBookCover(bookId, path, 'ok');
+}
+async function blobIsRealImage(blob) {
+  if (!blob || blob.size < 1000) return false;
+  if (!/^image\/(jpeg|png|webp|gif)$/.test(blob.type || '')) return false;
+  return true;
+}
+async function tryFetchImage(url) {
+  const res = await fetch(url, { mode: 'cors' });
+  if (!res.ok) return null;
+  const blob = await res.blob();
+  return blobIsRealImage(blob) ? blob : null;
+}
+async function fetchCoverForBook(book) {
+  // Open Library first (its covers allow browser fetching), then Google
+  // Books (best effort — it may refuse browser fetching; then the book
+  // simply waits in Cover review). Returns true when a cover was saved.
+  const isbn = isbnDigits(book.isbn);
+  if (!isbn) return false;
+  let blob = null;
+  try { blob = await tryFetchImage(OL_COVER + isbn + '-L.jpg'); } catch (e) { blob = null; }
+  if (!blob) {
+    try {
+      const res = await fetch(GB_API + isbn);
+      if (res.ok) {
+        const data = await res.json();
+        const thumb = data && data.items && data.items[0] && data.items[0].volumeInfo
+          && data.items[0].volumeInfo.imageLinks && data.items[0].volumeInfo.imageLinks.thumbnail;
+        if (thumb) blob = await tryFetchImage(String(thumb).replace(/^http:/, 'https:'));
+      }
+    } catch (e) { blob = null; }
+  }
+  if (!blob) return false;
+  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book.raw);
+  return true;
+}
+async function fetchCoverFromLink(book, url) {
+  const blob = await tryFetchImage(url);
+  if (!blob) throw new Error('That link did not return a usable image. Download the image and upload the file instead.');
+  await uploadCoverFile(book.id, new File([blob], coverObjectKey(book.id), { type: blob.type || 'image/jpeg' }), book.raw);
+}
+async function removeCover(book) {
+  const { error } = await sb.storage.from(COVERS_BUCKET).remove([coverObjectKey(book.id)]);
+  if (error) throw new Error(error.message);
+  await setBookCover(book.id, null, 'placeholder');
+}
+function openCoverReview() {
+  const list = books.filter((b) => b.cover_status !== 'ok');
+  $('reviewList').innerHTML = list.length ? list.map((b) => {
+    const url = coverUrl(b);
+    return '<div class="review-row">' + (url ? '<img src="' + escapeHtml(url) + '" alt="">' : '<img src="" alt="" style="visibility:hidden">')
+      + '<div><div class="review-title">' + escapeHtml(b.title) + '</div>'
+      + '<div class="hint">' + escapeHtml(b.author || '') + (b.isbn ? ' · ISBN ' + escapeHtml(b.isbn) : '') + '</div>'
+      + '<div class="review-actions">'
+      + '<label>Upload cover<input type="file" accept="image/jpeg,image/png,image/webp" data-review-file="' + b.id + '" hidden></label>'
+      + '<button type="button" data-review-fetch="' + b.id + '">Try auto-fetch</button>'
+      + (isMod() ? '<button type="button" data-review-remove="' + b.id + '">Keep placeholder</button>' : '')
+      + '</div><p class="review-error" data-review-error="' + b.id + '"></p></div></div>';
+  }).join('') : '<p>Every book has a verified cover.</p>';
+  $$('[data-review-file]').forEach((input) => input.addEventListener('change', async () => {
+    const f = input.files[0];
+    const id = input.dataset.reviewFile;
+    const errEl = document.querySelector('[data-review-error="' + id + '"]');
+    if (!f) return;
+    const b = books.find((x) => x.id === id);
+    try {
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) throw new Error('Use a JPEG, PNG or WebP image.');
+      if (f.size > MAX_COVER_BYTES) throw new Error('That image is over 5 MB.');
+      await uploadCoverFile(id, f, b.raw);
+      await loadAll();
+      openCoverReview();
+      showToast('Cover saved.');
+    } catch (e) { if (errEl) errEl.textContent = e.message; }
+  }));
+  $$('[data-review-fetch]').forEach((btn) => btn.addEventListener('click', async () => {
+    const id = btn.dataset.reviewFetch;
+    const errEl = document.querySelector('[data-review-error="' + id + '"]');
+    const b = books.find((x) => x.id === id);
+    btn.disabled = true;
+    try {
+      const ok = await fetchCoverForBook(b);
+      if (!ok) { if (errEl) errEl.textContent = 'No cover found online for this ISBN. Upload one instead.'; return; }
+      await loadAll();
+      openCoverReview();
+      showToast('Cover saved.');
+    } catch (e) { if (errEl) errEl.textContent = e.message; }
+    finally { btn.disabled = false; }
+  }));
+  $$('[data-review-remove]').forEach((btn) => btn.addEventListener('click', async () => {
+    const id = btn.dataset.reviewRemove;
+    const b = books.find((x) => x.id === id);
+    try {
+      await setBookCover(id, null, 'placeholder');
+      await loadAll();
+      openCoverReview();
+    } catch (e) { showToast('Could not update. ' + e.message); }
+  }));
+  $('reviewDialog').open || $('reviewDialog').showModal();
+}
+
+// ---------- CSV import (admin) ----------
+let importRows = null; // {fresh:[], skipped:[], rejected:[]}
+function buildTemplateCsv() {
+  const header = CSV_COLUMNS.join(',');
+  const example = ['A wonderful picnic', '', 'John Doe', '', '', '', '9781405235532', '', 'A story about a picnic.', '', ''].map(csvCell).join(',');
+  return '\uFEFF' + header + '\r\n' + example + '\r\n';
+}
+function analyseImport(rows) {
+  const fresh = [], skipped = [], rejected = [];
+  const header = (rows[0] || []).map((h) => String(h || '').trim());
+  const missing = CSV_COLUMNS.filter((c) => !header.includes(c));
+  if (missing.length) return { error: 'CSV header must include: ' + missing.join(', ') };
+  const existingSerials = new Set(books.map((b) => b.serial).filter(Boolean));
+  const seenSerials = new Set();
+  for (let i = 1; i < rows.length; i++) {
+    const rec = {};
+    header.forEach((h, j) => { rec[h] = (rows[i][j] || '').trim(); });
+    if (!Object.values(rec).some((v) => v)) continue;
+    const { errors, warnings } = validateBookRow(rec);
+    if (errors.length) { rejected.push({ rec, reasons: errors }); continue; }
+    const serial = rec.hkpl_serial_number || '';
+    if (serial && (existingSerials.has(serial) || seenSerials.has(serial))) { skipped.push({ rec, reason: 'HKPL Serial Number already in the library' }); continue; }
+    if (serial) seenSerials.add(serial);
+    fresh.push({ rec, warnings });
+  }
+  return { fresh, skipped, rejected };
+}
+function renderImportPreview(result) {
+  const el = $('uploadPreview');
+  if (result.error) { el.innerHTML = '<p class="error">' + escapeHtml(result.error) + '</p>'; $('confirmBtn').disabled = true; return; }
+  let html = '<p>' + result.fresh.length + ' new books · ' + result.skipped.length + ' skipped (already in the library) · ' + result.rejected.length + ' rejected.</p>';
+  if (result.fresh.length) {
+    html += '<table><thead><tr><th>Title</th><th>Author</th><th>ISBN</th><th>Notes</th></tr></thead><tbody>'
+      + result.fresh.slice(0, 20).map(({ rec, warnings }) => '<tr><td>' + escapeHtml(rec.title_en || rec.title_zh) + '</td><td>' + escapeHtml(rec.author) + '</td><td>' + escapeHtml(rec.isbn) + '</td><td>' + escapeHtml(warnings.join('; ')) + '</td></tr>').join('')
+      + '</tbody></table>' + (result.fresh.length > 20 ? '<p>…and ' + (result.fresh.length - 20) + ' more.</p>' : '');
+  }
+  if (result.rejected.length) {
+    html += '<p class="rejected">Rejected rows:</p><table><tbody>'
+      + result.rejected.slice(0, 10).map(({ rec, reasons }) => '<tr><td>' + escapeHtml(rec.title_en || rec.title_zh || '(no title)') + '</td><td class="rejected">' + escapeHtml(reasons.join('; ')) + '</td></tr>').join('')
+      + '</tbody></table>';
+  }
+  el.innerHTML = html;
+  $('confirmBtn').disabled = !result.fresh.length;
+}
+async function confirmImport() {
+  if (!importRows || !importRows.fresh.length) return;
+  $('uploadBusy').textContent = 'Importing ' + importRows.fresh.length + ' books…';
+  $('confirmBtn').disabled = true;
+  try {
+    const payload = importRows.fresh.map(({ rec }) => ({
+      title_en: rec.title_en, title_zh: rec.title_zh, author: rec.author,
+      illustrator: rec.illustrator, translator: rec.translator, publisher: rec.publisher,
+      isbn: rec.isbn, hkpl_serial_number: rec.hkpl_serial_number,
+      story_en: rec.story_en, story_zh: rec.story_zh, notes: rec.notes,
+      added_by: myId(), cover_status: 'needs_review',
+    }));
+    const { data, error } = await sb.from('books').insert(payload).select();
+    if (error) throw new Error(error.message);
+    $('uploadBusy').textContent = 'Fetching covers for ' + data.length + ' new books…';
+    let covered = 0;
+    for (const row of data) {
+      try { if (await fetchCoverForBook(mapBook(row))) covered++; } catch (e) { /* stays in review */ }
+    }
+    $('uploadDialog').close();
+    $('uploadBusy').textContent = '';
+    await loadAll();
+    showToast('Imported ' + data.length + ' books' + (covered ? ', ' + covered + ' covers found.' : '. Covers waiting in Cover review.'));
+  } catch (e) {
+    $('uploadError').textContent = e.message || 'Import failed.';
+  } finally {
+    $('uploadBusy').textContent = '';
+    $('confirmBtn').disabled = false;
+  }
+}
+
+// ---------- export / clear (admin) ----------
+function exportShelfCsv() {
+  const rows = sortedBooks(books.filter(bookMatches));
+  const lines = [['title_en', 'title_zh', 'author', 'isbn', 'hkpl_serial_number', 'read_by_my_child', 'report_submitted'].join(',')];
+  for (const b of rows) {
+    const tag = tags.get(b.id);
+    lines.push([b.raw.title_en, b.raw.title_zh, b.author, b.isbn, b.serial, tag ? '1' : '0', tag && tag.report_submitted ? '1' : '0'].map(csvCell).join(','));
+  }
+  downloadBlob(new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }), 'library-books-' + new Date().toISOString().slice(0, 10) + '.csv');
+}
+async function exportAllData() {
+  const [b, t, c, p] = await Promise.all([
+    sb.from('books').select('*'), sb.from('child_books').select('*'),
+    sb.from('comments').select('*'), sb.from('profiles').select('*'),
+  ]);
+  const err = [b, t, c, p].find((r) => r.error);
+  if (err) { showToast('Export failed. ' + err.error.message); return; }
+  downloadBlob(new Blob([JSON.stringify({ exported_at: new Date().toISOString(), books: b.data, child_books: t.data, comments: c.data, profiles: p.data }, null, 2)], { type: 'application/json' }), 'library-backup-' + new Date().toISOString().slice(0, 10) + '.json');
+}
+async function clearLibrary() {
+  const { error: e1 } = await sb.from('comments').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+  const { error: e2 } = await sb.from('child_books').delete().neq('child_id', '00000000-0000-0000-0000-000000000000');
+  const { error: e3 } = await sb.from('books').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+  if (e1 || e2 || e3) throw new Error((e1 || e2 || e3).message);
+  // Remove stored covers, page by page.
+  let page = await sb.storage.from(COVERS_BUCKET).list('', { limit: 1000 });
+  while (page.data && page.data.length) {
+    const names = page.data.map((o) => o.name);
+    await sb.storage.from(COVERS_BUCKET).remove(names);
+    page = await sb.storage.from(COVERS_BUCKET).list('', { limit: 1000 });
+  }
+}
+
+// ---------- users (admin) ----------
+async function openUsers() {
+  const { data, error } = await sb.from('profiles').select('*').order('created_at');
+  if (error) { showToast('Could not load users. ' + error.message); return; }
+  profiles = new Map(data.map((p) => [p.id, p]));
+  $('usersList').innerHTML = data.map((p) => {
+    const isMe = p.id === myId();
+    return '<div class="user-row' + (p.active ? '' : ' disabled') + '">'
+      + '<div><div class="who">' + escapeHtml(p.child_nickname || '(no nickname)') + (isMe ? ' (you)' : '') + '</div>'
+      + '<div class="meta">' + escapeHtml(p.email) + (p.child_age != null ? ' · age ' + p.child_age : '') + (p.active ? '' : ' · disabled') + '</div></div>'
+      + '<div class="user-actions"><span class="role ' + p.role + '">' + p.role + '</span>'
+      + '<select data-role-for="' + p.id + '" aria-label="Role for ' + escapeHtml(p.child_nickname || p.email) + '">'
+      + ['user', 'moderator', 'admin'].map((r) => '<option value="' + r + '"' + (p.role === r ? ' selected' : '') + '>' + r + '</option>').join('')
+      + '</select>'
+      + '<button type="button" data-edit-user="' + p.id + '">Edit</button>'
+      + '<button type="button" data-active-user="' + p.id + '">' + (p.active ? 'Disable' : 'Enable') + '</button>'
+      + '</div></div>';
+  }).join('') || '<p>No accounts yet.</p>';
+  $$('[data-role-for]').forEach((sel) => sel.addEventListener('change', async () => {
+    const { error } = await sb.rpc('admin_set_role', { target_id: sel.dataset.roleFor, new_role: sel.value });
+    if (error) { showToast('Could not change the role. ' + error.message); openUsers(); return; }
+    showToast('Role updated.');
+    openUsers();
+  }));
+  $$('[data-active-user]').forEach((btn) => btn.addEventListener('click', async () => {
+    const { error } = await sb.rpc('admin_set_active', { target_id: btn.dataset.activeUser, make_active: btn.textContent.trim() === 'Enable' });
+    if (error) { showToast('Could not change the account. ' + error.message); return; }
+    showToast('Account updated.');
+    openUsers();
+  }));
+  $$('[data-edit-user]').forEach((btn) => btn.addEventListener('click', async () => {
+    const p = profiles.get(btn.dataset.editUser);
+    if (!p) return;
+    const nickname = prompt('Child’s nickname:', p.child_nickname || '');
+    if (nickname === null) return;
+    const ageRaw = prompt('Child’s age:', p.child_age == null ? '' : String(p.child_age));
+    if (ageRaw === null) return;
+    const age = ageRaw.trim() === '' ? null : Number(ageRaw);
+    const { error } = await sb.rpc('admin_update_child', { target_id: p.id, nickname: nickname.trim(), age: Number.isNaN(age) ? null : age });
+    if (error) { showToast('Could not update. ' + error.message); return; }
+    showToast('Account updated.');
+    openUsers();
+  }));
+  $('usersError').textContent = '';
+  $('usersBusy').textContent = '';
+  if (!$('usersDialog').open) $('usersDialog').showModal();
+}
+async function addAccount() {
+  const email = ($('nuEmail').value || '').trim();
+  const nickname = ($('nuNickname').value || '').trim();
+  const ageRaw = ($('nuAge').value || '').trim();
+  const password = $('nuPassword').value || '';
+  const errEl = $('usersError');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Enter the parent’s email address.'; return; }
+  if (!nickname) { errEl.textContent = 'Enter the child’s nickname.'; return; }
+  if (password.length < 6) { errEl.textContent = 'The starting password needs at least 6 characters.'; return; }
+  errEl.textContent = '';
+  $('usersBusy').textContent = 'Creating the account…';
+  try {
+    const { data, error } = await getSignupClient().auth.signUp({ email, password });
+    if (error) throw new Error(error.message);
+    const newId = data.user && data.user.id;
+    if (!newId) throw new Error('The account was not created.');
+    const age = ageRaw === '' ? null : Number(ageRaw);
+    const { error: e2 } = await sb.rpc('admin_update_child', { target_id: newId, nickname, age: Number.isNaN(age) ? null : age });
+    if (e2) throw new Error(e2.message);
+    $('nuEmail').value = ''; $('nuNickname').value = ''; $('nuAge').value = ''; $('nuPassword').value = '';
+    $('usersBusy').textContent = '';
+    showToast('Account created for ' + nickname + '. Share the starting password privately.');
+    openUsers();
+  } catch (e) {
+    $('usersBusy').textContent = '';
+    errEl.textContent = e.message || 'Could not create the account.';
+  }
+}
+
+// ---------- my account ----------
+function openAccount() {
+  $('accountEmail').textContent = 'Logged in as ' + (me.email || '') + ' — account for ' + (me.child_nickname || 'my child') + '.';
+  $('accNickname').value = me.child_nickname || '';
+  $('accAge').value = me.child_age == null ? '' : String(me.child_age);
+  $('accPassword').value = '';
+  $('accPassword2').value = '';
+  $('accountError').textContent = '';
+  $('accountBusy').textContent = '';
+  $('accountDialog').showModal();
+}
+async function saveAccount() {
+  const nickname = ($('accNickname').value || '').trim();
+  const ageRaw = ($('accAge').value || '').trim();
+  const pw = $('accPassword').value || '';
+  const pw2 = $('accPassword2').value || '';
+  const errEl = $('accountError');
+  if (!nickname) { errEl.textContent = 'Enter the child’s nickname.'; return; }
+  if (pw && pw.length < 6) { errEl.textContent = 'The new password needs at least 6 characters.'; return; }
+  if (pw && pw !== pw2) { errEl.textContent = 'The two passwords do not match.'; return; }
+  errEl.textContent = '';
+  $('accountBusy').textContent = 'Saving…';
+  try {
+    const age = ageRaw === '' ? null : Number(ageRaw);
+    const { error } = await sb.rpc('update_own_profile', { nickname, age: Number.isNaN(age) ? null : age });
+    if (error) throw new Error(error.message);
+    if (pw) {
+      const { error: e2 } = await sb.auth.updateUser({ password: pw });
+      if (e2) throw new Error(e2.message);
+    }
+    me = await loadMyProfile();
+    $('accountBusy').textContent = '';
+    $('accountDialog').close();
+    showToast('Account saved.');
+    render();
+  } catch (e) {
+    $('accountBusy').textContent = '';
+    errEl.textContent = e.message || 'Could not save.';
+  }
+}
+
+// ---------- wiring + boot ----------
+function wireStatic() {
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    $('loginError').textContent = '';
+    try { await doLogin($('loginEmail').value.trim(), $('loginPassword').value); }
+    catch (err) { $('loginError').textContent = err.message || 'Login failed.'; }
+  });
+  $('forgotBtn').addEventListener('click', async () => {
+    const email = ($('loginEmail').value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('loginError').textContent = 'Enter your email above first, then tap Forgot password.'; return; }
+    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: SITE_URL });
+    if (error) { $('loginError').textContent = error.message; return; }
+    $('loginForm').hidden = true;
+    $('forgotSent').hidden = false;
+  });
+  $('resetForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = $('resetPassword').value, pw2 = $('resetPassword2').value;
+    if (pw.length < 6) { $('resetError').textContent = 'The new password needs at least 6 characters.'; return; }
+    if (pw !== pw2) { $('resetError').textContent = 'The two passwords do not match.'; return; }
+    const { error } = await sb.auth.updateUser({ password: pw });
+    if (error) { $('resetError').textContent = error.message; return; }
+    $('resetForm').hidden = true;
+    $('loginForm').hidden = false;
+    $('loginError').textContent = '';
+    showToast('Password changed. Log in with the new one.');
+  });
+  for (const id of ['logoutBtn', 'logoutBtnB']) $(id).addEventListener('click', doLogout);
+  for (const id of ['addBookBtn', 'addBookBtnB']) $(id).addEventListener('click', openAddBook);
+  for (const id of ['reviewCoversBtn', 'reviewCoversBtnB']) $(id).addEventListener('click', openCoverReview);
+  for (const id of ['usersBtn', 'usersBtnB']) $(id).addEventListener('click', openUsers);
+  for (const id of ['accountBtn', 'accountBtnB']) $(id).addEventListener('click', openAccount);
+  for (const id of ['uploadCsvBtn', 'uploadCsvBtnB']) $(id).addEventListener('click', () => {
+    $('uploadPreview').innerHTML = '';
+    $('uploadError').textContent = '';
+    $('uploadBusy').textContent = '';
+    $('csvFile').value = '';
+    importRows = null;
+    $('confirmBtn').disabled = true;
+    $('uploadDialog').showModal();
+  });
+  for (const id of ['clearBtn', 'clearBtnB']) $(id).addEventListener('click', () => {
+    $('clearText').textContent = 'This deletes all ' + books.length + ' books in the library, every cover, every child’s tags, comments and report marks. This cannot be undone.';
+    $('clearError').textContent = '';
+    $('clearDialog').showModal();
+  });
+
+  // dashboard + search collapse (collapsed on phones, open on desktop)
+  $('dashboardToggle').addEventListener('click', () => {
+    const open = $('dashboardToggle').getAttribute('aria-expanded') === 'true';
+    $('dashboardToggle').setAttribute('aria-expanded', String(!open));
+    $('dashboardPanel').hidden = open;
+  });
+  const narrow = window.innerWidth < 680;
+  $('collectionPanel').classList.toggle('collapsed', narrow);
+  $('collectionToggle').setAttribute('aria-expanded', String(!narrow));
+  $('collectionToggleLabel').textContent = narrow ? 'Show search' : 'Hide search';
+  $('collectionToggle').addEventListener('click', () => {
+    const collapsed = $('collectionPanel').classList.toggle('collapsed');
+    $('collectionToggle').setAttribute('aria-expanded', String(!collapsed));
+    $('collectionToggleLabel').textContent = collapsed ? 'Show search' : 'Hide search';
+  });
+
+  // filters
+  $('search').addEventListener('input', () => { filters.q = $('search').value; render(); });
+  $('sort').addEventListener('change', () => { filters.sort = $('sort').value; render(); });
+  $('reportFilter').addEventListener('change', () => { filters.report = $('reportFilter').value; render(); });
+  $$('.chip').forEach((chip) => chip.addEventListener('click', () => {
+    $$('.chip').forEach((c) => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+    chip.classList.add('active');
+    chip.setAttribute('aria-pressed', 'true');
+    filters.lang = chip.dataset.filter;
+    render();
+  }));
+  $('gridView').addEventListener('click', () => setView('grid'));
+  $('listView').addEventListener('click', () => setView('list'));
+  $('exportCsv').addEventListener('click', exportShelfCsv);
+  $('exportAll').addEventListener('click', exportAllData);
+  $('books').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-book]');
+    if (!btn) return;
+    const b = books.find((x) => x.id === btn.dataset.book);
+    if (b) openBook(b, 'view');
+  });
+
+  // detail dialog exits
+  $('dialogClose').addEventListener('click', () => {
+    if (detailMode === 'edit') requestLeaveEdit('close');
+    else dialog.close();
+  });
+  dialog.addEventListener('cancel', (e) => {
+    if (detailMode === 'edit') { e.preventDefault(); requestLeaveEdit('close'); }
+  });
+  dialog.addEventListener('close', () => {
+    detailMode = 'view';
+    addingBook = false;
+    dialog.classList.remove('editing');
+    clearStagedCover();
+  });
+  $('unsavedKeep').addEventListener('click', () => $('unsavedDialog').close());
+  $('unsavedClose').addEventListener('click', () => $('unsavedDialog').close());
+  $('unsavedDiscard').addEventListener('click', () => {
+    $('unsavedDialog').close();
+    clearStagedCover();
+    leaveEdit(pendingLeaveAction);
+  });
+  $('unsavedSave').addEventListener('click', async () => {
+    $('unsavedDialog').close();
+    if (currentBook && await saveDetailEdits(currentBook) && pendingLeaveAction === 'close') dialog.close();
+  });
+
+  // delete / remove-cover confirms
+  $('deleteKeep').addEventListener('click', () => $('deleteDialog').close());
+  $('deleteClose').addEventListener('click', () => $('deleteDialog').close());
+  $('deleteConfirm').addEventListener('click', async () => {
+    if (!deleteTarget) return;
+    $('deleteError').textContent = '';
+    const { error } = await sb.from('books').delete().eq('id', deleteTarget.id);
+    if (error) { $('deleteError').textContent = error.message; return; }
+    try { await sb.storage.from(COVERS_BUCKET).remove([coverObjectKey(deleteTarget.id)]); } catch (e) { /* cover may not exist */ }
+    $('deleteDialog').close();
+    dialog.close();
+    await loadAll();
+    showToast('Book deleted.');
+  });
+  $('removeCoverKeep').addEventListener('click', () => $('removeCoverDialog').close());
+  $('removeCoverClose').addEventListener('click', () => $('removeCoverDialog').close());
+  $('removeCoverConfirm').addEventListener('click', async () => {
+    if (!removeCoverBook) return;
+    if (detailMode === 'edit') {
+      clearStagedCover();
+      stagedCover = { kind: 'remove' };
+      $('removeCoverDialog').close();
+      refreshVisualColumn(removeCoverBook);
+      return;
+    }
+    try {
+      await removeCover(removeCoverBook);
+      $('removeCoverDialog').close();
+      await loadAll();
+      const fresh = books.find((x) => x.id === removeCoverBook.id);
+      if (fresh) openBook(fresh, 'view');
+      showToast('Cover removed.');
+    } catch (e) { showToast('Could not remove the cover. ' + e.message); }
+  });
+
+  // upload dialog
+  $('uploadClose').addEventListener('click', () => $('uploadDialog').close());
+  $('uploadCancel').addEventListener('click', () => $('uploadDialog').close());
+  $('downloadTemplate').addEventListener('click', () => {
+    downloadBlob(new Blob([buildTemplateCsv()], { type: 'text/csv;charset=utf-8' }), 'library-books-template.csv');
+  });
+  $('previewBtn').addEventListener('click', async () => {
+    const file = $('csvFile').files[0];
+    if (!file) { $('uploadError').textContent = 'Choose a CSV file first.'; return; }
+    $('uploadBusy').textContent = 'Reading the file…';
+    $('uploadError').textContent = '';
+    try {
+      const text = await readFileText(file);
+      importRows = analyseImport(parseCsv(text));
+      renderImportPreview(importRows);
+    } catch (e) {
+      $('uploadError').textContent = e.message || 'Could not read the file.';
+    } finally {
+      $('uploadBusy').textContent = '';
+    }
+  });
+  $('confirmBtn').addEventListener('click', confirmImport);
+
+  // review dialog
+  $('reviewClose').addEventListener('click', () => $('reviewDialog').close());
+  $('reviewDone').addEventListener('click', () => $('reviewDialog').close());
+
+  // clear dialogs
+  $('clearCancel').addEventListener('click', () => $('clearDialog').close());
+  $('clearClose').addEventListener('click', () => $('clearDialog').close());
+  $('clearExport').addEventListener('click', exportShelfCsv);
+  $('clearDelete').addEventListener('click', () => {
+    $('clearDialog').close();
+    $('clearConfirmText').textContent = 'This is the last check. All ' + books.length + ' books, every cover, every tag, comment and report mark will be gone.';
+    $('clearConfirmError').textContent = '';
+    $('clearConfirmDialog').showModal();
+  });
+  $('clearConfirmKeep').addEventListener('click', () => $('clearConfirmDialog').close());
+  $('clearConfirmClose').addEventListener('click', () => $('clearConfirmDialog').close());
+  $('clearConfirmDelete').addEventListener('click', async () => {
+    try {
+      await clearLibrary();
+      $('clearConfirmDialog').close();
+      dialog.close();
+      await loadAll();
+      showToast('The library is empty now.');
+    } catch (e) {
+      $('clearConfirmError').textContent = e.message || 'Could not clear the library.';
+    }
+  });
+
+  // users + account dialogs
+  $('usersClose').addEventListener('click', () => $('usersDialog').close());
+  $('usersDone').addEventListener('click', () => $('usersDialog').close());
+  $('addUserBtn').addEventListener('click', addAccount);
+  $('accountClose').addEventListener('click', () => $('accountDialog').close());
+  $('accountCancel').addEventListener('click', () => $('accountDialog').close());
+  $('accountSave').addEventListener('click', saveAccount);
+}
+function setView(view) {
+  filters.view = view;
+  $('gridView').classList.toggle('active', view === 'grid');
+  $('gridView').setAttribute('aria-pressed', String(view === 'grid'));
+  $('listView').classList.toggle('active', view === 'list');
+  $('listView').setAttribute('aria-pressed', String(view === 'list'));
+  render();
+}
+
+async function boot() {
+  wireStatic();
+  if (location.hash.includes('type=recovery')) {
+    // Password-reset link landed here: Supabase swaps the code for a
+    // session, then we ask for the new password.
+    $('loginForm').hidden = true;
+    $('resetForm').hidden = false;
+  }
+  const { data } = await sb.auth.getSession();
+  session = data.session || null;
+  if (session) {
+    try { await enterApp(); return; } catch (e) { /* fall through to login */ }
+  }
+  showLogin();
+  sb.auth.onAuthStateChange((_event, newSession) => {
+    if (newSession && !session) {
+      session = newSession;
+      if (location.hash.includes('type=recovery')) return; // stay on reset form
+      enterApp();
+    }
+  });
+}
+boot();
+
+</script>
+</html>
