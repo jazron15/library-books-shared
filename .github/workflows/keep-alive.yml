@@ -1,0 +1,21 @@
+# Keeps the Supabase free project awake: a tiny read once a day, so the
+# project never hits the 7-day inactivity pause. The publishable key is
+# public by design; it only ever reads the books table (one row).
+name: keep-alive
+on:
+  schedule:
+    - cron: '30 3 * * *'  # daily, 11:30 HKT
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Touch the library API
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          curl -s -o /dev/null -w "%{http_code}\n" \
+            "$SUPABASE_URL/rest/v1/books?select=id&limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY"
