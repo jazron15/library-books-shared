@@ -201,6 +201,14 @@ body.gated main,body.gated .adminbar,body.gated .toast{display:none}
 .review-row .review-actions button, .review-row .review-actions label { font: inherit; font-size: .88rem; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
 .review-row .review-error { color: var(--red); font-size: .88rem; margin: 6px 0 0; }
 
+/* Covers are square (2026-11-05): most picture books are square, and the
+   tall 5/7 frame cropped them. Overrides the base frame; app.css loads
+   after the base CSS, so these win. Portrait covers get a small top/bottom
+   crop instead, which is the better trade for this shelf. */
+.cover-frame { aspect-ratio: 1 / 1; }
+.books.list .cover-frame { width: 80px; height: 80px; }
+.review-row img { width: 64px; height: 64px; }
+
 /* Shelf card text: title and author are separate rows, not one run-on line.
    (2026-11-05 — the spans had no CSS, so they ran together inline.) */
 .book-meta { display: block; padding: 14px 4px 2px; }
