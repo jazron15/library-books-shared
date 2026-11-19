@@ -1,0 +1,29 @@
+# Keeps the Supabase free project awake: a tiny read once a day, so the
+# project never hits the 7-day inactivity pause. The publishable key is
+# public by design; it only ever reads the books table (one row).
+#
+# HARDENED: unlike the original, this version FAILS (red tick) unless
+# Supabase answers HTTP 200. A wrong or missing SUPABASE_PUBLISHABLE_KEY
+# can no longer hide behind a green tick. Paste over
+# .github/workflows/keep-alive.yml in the repo; the next scheduled run
+# proves the Actions variables one way or the other.
+name: keep-alive
+on:
+  schedule:
+    - cron: '30 3 * * *'  # daily, 11:30 HKT
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Touch the library API
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "$SUPABASE_URL/rest/v1/books?select=id&limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY")
+          echo "Supabase answered HTTP $code"
+          test "$code" = "200"
